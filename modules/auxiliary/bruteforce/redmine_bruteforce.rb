@@ -10,7 +10,15 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class AlienVault < ::Metasploit::Framework::LoginScanner::HTTP
+      class Redmine < ::Metasploit::Framework::LoginScanner::HTTP
+        def check_setup
+
+        end
+
+        def get_login_state(username, password)
+
+        end
+
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,24 +34,48 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
+              'uri' => uri
+            })
+
+            res = cli.send_recv(req)
+            unless res
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
+              return ::Metasploit::Framework::LoginScanner::Result.new(result_opts)
+            end
+
+            res.body =~ /<meta name="csrf-token" content="(.*?)" \/>/
+            csrf = $1
+
+            unless csrf
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
+              return ::Metasploit::Framework::LoginScanner::Result.new(result_opts)
+            end
+
+            req = cli.request_cgi({
               'method' => 'POST',
-              'uri' => normalize_uri(target_uri.path, 'ossim', 'session', 'login.php'),
+              'uri' => uri + '/login',
               'vars_post' => {
-                'embed' => '',
-                'bookmark_string' => '',
-                'user' => credential.public,
-                'passu' => credential.private,
-                'pass' => Rex::Text.encode_base64(credential.private)
-              }
+                'authenticity_token' => csrf,
+                'username' => credential.public,
+                'password' => credential.private
+              },
+              'cookie' => res.get_cookies
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
-            else
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
+            unless res
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
+              return ::Metasploit::Framework::LoginScanner::Result.new(result_opts)
             end
+
+            if res.code == 302
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+            else
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res.body)
+            end
+
+
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
@@ -65,23 +97,19 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'AlienVault Login Scanner',
+        'Name'           => 'Redmine Login Scanner',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
-        AlienVault instance.
-      ),
+        ),
         'Author'         =>
           [
-            'ExploitHub'
           ],
         'License'        => 'ExploitHub',
         'References'     =>
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 443,
-            'STOP_ON_SUCCESS' => true,
-            'SSL' => true
+            'RPORT'           => 80,
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -97,11 +125,11 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::AlienVault.new(
+    scanner = Metasploit::Framework::LoginScanner::Redmine.new(
       configure_http_login_scanner(
+        uri: datastore['TARGETURI'],
         host: ip,
         port: datastore['RPORT'],
-        uri: datastore['TARGETURI'],
         cred_details: cred_collection,
         stop_on_success: datastore['STOP_ON_SUCCESS'],
         bruteforce_speed: datastore['BRUTEFORCE_SPEED'],

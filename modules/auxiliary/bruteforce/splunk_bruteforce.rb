@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class AlienVault < ::Metasploit::Framework::LoginScanner::HTTP
+      class Splunk < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -25,21 +25,21 @@ module Metasploit
             configure_http_client(cli)
             cli.connect
 
+            cval = Rex::Text.rand_text_alpha(10)
             req = cli.request_cgi({
               'method' => 'POST',
-              'uri' => normalize_uri(target_uri.path, 'ossim', 'session', 'login.php'),
+              'uri' => '/en-US/account/login',
               'vars_post' => {
-                'embed' => '',
-                'bookmark_string' => '',
-                'user' => credential.public,
-                'passu' => credential.private,
-                'pass' => Rex::Text.encode_base64(credential.private)
-              }
+                'cval' => cval,
+                'username' => credential.public,
+                'password' => credential.private,
+              },
+              'cookie' => 'cval='+cval
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302
+            if res and res.code == 200
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
@@ -65,10 +65,9 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'AlienVault Login Scanner',
+        'Name'           => 'Splunk Login Scanner',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
-        AlienVault instance.
+        This module will bruteforce credentials on a Splunk instance.
       ),
         'Author'         =>
           [
@@ -79,9 +78,8 @@ class MetasploitModule < Msf::Auxiliary
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 443,
-            'STOP_ON_SUCCESS' => true,
-            'SSL' => true
+            'RPORT'           => 8000,
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -97,7 +95,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::AlienVault.new(
+    scanner = Metasploit::Framework::LoginScanner::Splunk.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class AlienVault < ::Metasploit::Framework::LoginScanner::HTTP
+      class OwnCloud < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,25 +26,33 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'method' => 'POST',
-              'uri' => normalize_uri(target_uri.path, 'ossim', 'session', 'login.php'),
-              'vars_post' => {
-                'embed' => '',
-                'bookmark_string' => '',
-                'user' => credential.public,
-                'passu' => credential.private,
-                'pass' => Rex::Text.encode_base64(credential.private)
-              }
+              'uri' => uri + '/index.php/login'
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
+            cookie = res.get_cookies
+            token = $1 if res.body =~ /<head data-requesttoken="(.*?)">/
+            req = cli.request_cgi({
+              'method' => 'POST',
+              'uri' => uri + '/index.php/login',
+              'vars_post' => {
+                'user' => credential.public,
+                'password' => credential.private,
+                'requesttoken' => token
+              },
+              'cookie' => cookie
+            })
+
+            res = cli.send_recv(req)
+
+            if res && res.headers['Location'] =~ /\/index.php\/apps\/files/
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
             end
-          rescue Exception => e
+
+          rescue
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
 
@@ -65,14 +73,12 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'AlienVault Login Scanner',
+        'Name'           => 'ownCloud Login Scanner',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
-        AlienVault instance.
+        This module attempts to bruteforce credentials on an ownCloud instance
       ),
         'Author'         =>
           [
-            'ExploitHub'
           ],
         'License'        => 'ExploitHub',
         'References'     =>
@@ -80,8 +86,8 @@ class MetasploitModule < Msf::Auxiliary
           ],
         'DefaultOptions' => {
             'RPORT'           => 443,
-            'STOP_ON_SUCCESS' => true,
-            'SSL' => true
+            'SSL' => true,
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -97,7 +103,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::AlienVault.new(
+    scanner = Metasploit::Framework::LoginScanner::OwnCloud.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

