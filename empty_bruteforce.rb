@@ -11,16 +11,29 @@ module Metasploit
   module Framework
     module LoginScanner
       class Empty < ::Metasploit::Framework::LoginScanner::HTTP
-        def check_setup
-
-        end
-
-        def get_login_state(username, password)
-
-        end
-
         def attempt_login(credential)
+          result_opts = {
+            credential: credential,
+            host: host,
+            port: port,
+            protocol: 'tcp',
+            #service_name: 'http'
+          }
 
+          begin
+            cli = Rex::Proto::Http::Client.new(host, port, {'Msf'=>framework,'MsfExploit'=>framework_module},ssl,ssl_version,proxies,http_username,http_password)
+            configure_http_client(cli)
+            cli.connect
+
+            req = cli.request_cgi({
+            })
+
+            res = cli.send_recv(req)
+          rescue Exception => e
+            result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
+          end
+
+          ::Metasploit::Framework::LoginScanner::Result.new(result_opts)
         end
       end
     end
@@ -55,7 +68,7 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def run_host(ip)
-    cred_collection = Metasploit::Framework::CredentialCollection.new(
+    cred_collection = ::Metasploit::Framework::CredentialCollection.new(
       blank_passwords: datastore['BLANK_PASSWORDS'],
       pass_file: datastore['PASS_FILE'],
       password: datastore['PASSWORD'],
@@ -69,6 +82,7 @@ class MetasploitModule < Msf::Auxiliary
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
+        uri: datastore['TARGETURI'],
         cred_details: cred_collection,
         stop_on_success: datastore['STOP_ON_SUCCESS'],
         bruteforce_speed: datastore['BRUTEFORCE_SPEED'],
@@ -79,7 +93,21 @@ class MetasploitModule < Msf::Auxiliary
     )
 
     scanner.scan! do |result|
+      creds = result.to_h
+      creds.merge!(
+        module_fullname: fullname,
+        workspace_id: myworkspace_id
+      )
 
+      if result.success?
+        credcore = create_credential(creds)
+        creds[:core] = credcore
+        create_credential_login(creds)
+        print_good("#{ip}:#{rport} - LOGIN SUCCESSFUL: #{result.credential}")
+      else
+        invalidate_login(creds)
+        vprint_error("#{ip}:#{rport} - LOGIN FAILED: #{result.credential} (#{result.status})")
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
-VolatileMinds Store Modules and Supporting Material
-=
-
-.orig/ folder contains the original material submitted to ExploitHub
+#modules from exploithub
 
 modules/ stores the modules in a way that allows us to use loadpath in msfconsole
+
+plugins/ stores plugins that enable metasploit to consume third party
+APIs
