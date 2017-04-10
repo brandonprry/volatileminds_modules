@@ -29,7 +29,7 @@ class MetasploitModule < Msf::Auxiliary
           'bperry',
           'Claudio Viviani' #discovery/poc
         ],
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'DisclosureDate' => "Sep 11 2014"
     ))
 

@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits an unauthenticated SQL injection in order to enumerate the Wordpress
       users tables, including password hashes. This module was tested against version 1.2.7.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module

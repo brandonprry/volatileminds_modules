@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
       This module will exploit an unauthenticated SQL injection in OS Solution OSProperty 2.8.0
       for Joomla! in order to enumerate usernames and password hashes from the Joomla! database
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module

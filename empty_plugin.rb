@@ -1,40 +1,41 @@
 require 'digest'
 
 module Msf
-class Plugin::ExploitHub < Msf::Plugin
+class Plugin::VolatileMinds < Msf::Plugin
   class ConsoleCommandDispatcher
     include Msf::Ui::Console::CommandDispatcher
 
     def name
-      'ExploitHub'
+      'VolatileMinds'
     end
 
     def commands
       {
-        'eh_login' => 'Login with your ExploitHub credentials',
+        'vm_login' => 'Login with your VolatileMinds credentials',
       }
     end
 
-    def cmd_eh_login(*args)
+    def cmd_vm_login(*args)
+      print_good("hello")
     end
 
   end
 
   def initialize(framework, opts)
     super
-    print_status("ExploitHub plugin loaded. Log in with your ExploitHub credentials.")
+    print_status("VolatileMinds plugin loaded. Log in with your VolatileMinds credentials.")
   end
 
   def cleanup
-    remove_console_dispatcher('ExploitHub')
+    remove_console_dispatcher('VolatileMinds')
   end
 
   def name
-    'ExploitHub'
+    'VolatileMinds'
   end
 
   def desc
-    'Integrate Metasploit with your ExploitHub account'
+    'Integrate Metasploit with your VolatileMinds account'
   end
 end
 end

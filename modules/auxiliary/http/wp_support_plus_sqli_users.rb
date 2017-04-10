@@ -24,7 +24,7 @@ class MetasploitModule < Msf::Auxiliary
         ],
       'Author'         =>
         [
-          'ExploitHub'
+          'VolatileMinds'
         ],
       'License'        => MSF_LICENSE,
       'DisclosureDate' => "Dec 12 2016"

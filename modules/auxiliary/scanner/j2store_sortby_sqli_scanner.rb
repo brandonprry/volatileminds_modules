@@ -20,7 +20,7 @@ class Metasploit4 < Msf::Auxiliary
       in order to determine if a given instance of Joomla is vulnerable to a
       SQL injection vulnerability present in version 3.1.6 of J2Store and earlier.',
       'Author'       => ['bperry'],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

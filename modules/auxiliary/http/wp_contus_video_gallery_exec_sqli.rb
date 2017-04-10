@@ -21,7 +21,7 @@ class MetasploitModule < Msf::Exploit::Remote
       'Author'         => [
         'Brandon Perry <bperry.volatile[at]gmail.com>' # Discovery / msf module
       ],
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'References'     =>
         [
           ['CVE', '2015-2065'],

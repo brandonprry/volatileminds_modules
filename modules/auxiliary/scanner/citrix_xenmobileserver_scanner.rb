@@ -18,9 +18,9 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'Citrix XenMobile Server Scanner',
       'Description' => 'This module scans for instances of Citrix XenMobile Server.',
       'Author'       => [
-        'ExploitHub'
+        'VolatileMinds'
        ],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

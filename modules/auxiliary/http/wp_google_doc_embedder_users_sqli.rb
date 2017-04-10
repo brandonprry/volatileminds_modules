@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits an unauthenticated SQL injection in Google Documents Embedder v2.5.14
       in order to pull the users and their password hashes from the database
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module

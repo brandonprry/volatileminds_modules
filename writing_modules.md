@@ -30,7 +30,7 @@ report_vuln(
 
 Bruteforce modules
 --
-Bruteforce modules that find new credentials should add the credential to the database with `create_credential_login`. This will also create a host and service if service details are included. ExploitHub brute force modules will be a little different from other brute force modules in the Metasploit framework. Our brute force modules are self-contained LoginScanners, whereas LoginScanner modules in the tree are split across multiple files.
+Bruteforce modules that find new credentials should add the credential to the database with `create_credential_login`. This will also create a host and service if service details are included. VolatileMinds brute force modules will be a little different from other brute force modules in the Metasploit framework. Our brute force modules are self-contained LoginScanners, whereas LoginScanner modules in the tree are split across multiple files.
 
 Example usage:
 

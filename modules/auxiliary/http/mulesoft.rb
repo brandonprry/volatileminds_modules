@@ -19,7 +19,7 @@ class MetasploitModule < Msf::Exploit::Remote
         [
           'bperry'
         ],
-      'License'     => 'ExploitHub',
+      'License'     => 'VolatileMinds',
       'References'  =>
         [
         ],

@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'Discourse Forums Scanner',
       'Description' => 'This module scans for instances of Discourse forums',
       'Author'       => [],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

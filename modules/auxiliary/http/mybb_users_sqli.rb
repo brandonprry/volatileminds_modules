@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
       in order to enumerate all the users, emails, salts, and password hashes and save
       them into a CSV file.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry'

@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'MantisBT Scanner',
       'Description' => 'This module scans for instances of MantisBT open source bug tracking software.',
       'Author'       => [],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

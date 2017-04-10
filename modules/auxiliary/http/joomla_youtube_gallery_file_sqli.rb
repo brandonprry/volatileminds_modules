@@ -21,7 +21,7 @@ class MetasploitModule < Msf::Auxiliary
       This likely requires a slightly misconfigured database in that the database user must
       have the FILE permissions.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'bperry'

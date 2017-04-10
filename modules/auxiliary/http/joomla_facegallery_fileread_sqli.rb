@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       misconfigured SQL instance is likely required in that the MySQL user will need
       to have the FILE permission. This is a common misconfiguration.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module

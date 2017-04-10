@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       in order to attempt reading an arbitrary file on the web server with the permissions of the
       SQL database user.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module

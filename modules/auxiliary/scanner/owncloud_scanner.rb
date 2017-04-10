@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'ownCloud Scanner',
       'Description' => 'This module scans for ownCloud instances',
       'Author'       => [],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

@@ -23,7 +23,7 @@ class MetasploitModule < Msf::Auxiliary
         [
           'bperry' #discovery/metasploit module
         ],
-      'License'     => 'ExploitHub',
+      'License'     => 'VolatileMinds',
       'References'  =>
         [
           ['EDB', '36862'],

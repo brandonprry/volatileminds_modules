@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits a UNION-based unauthenticated SQL injection within version 2.7
       of Contus Video Gallery in order to enumerate the users table.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module

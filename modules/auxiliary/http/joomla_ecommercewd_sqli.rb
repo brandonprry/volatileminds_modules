@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Exploit
       This module exploits an unauthenticated SQL injection to attempt
       writing a PHP payload to a given path in order to achieve remote code execution.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry'

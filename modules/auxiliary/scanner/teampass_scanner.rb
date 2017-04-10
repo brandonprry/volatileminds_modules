@@ -19,7 +19,7 @@ class MetasploitModule < Msf::Auxiliary
     super(
       'Name'        => 'TeamPass Password Manager Scanner',
       'Description' => 'This module scans for TeamPass Password Manager instances',
-      'Author'       => ['ExploitHub'],
+      'Author'       => ['VolatileMinds'],
       'License'     => MSF_LICENSE
     )
     register_options(

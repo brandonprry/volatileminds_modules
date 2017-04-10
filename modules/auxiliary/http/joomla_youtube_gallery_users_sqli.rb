@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits an unauthenticated SQL injection in Joomla Youtube Gallery
       in order to enumerate the users table in the database. Tested against version 4.1.7.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'bperry'

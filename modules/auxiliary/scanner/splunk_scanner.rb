@@ -17,8 +17,8 @@ class MetasploitModule < Msf::Auxiliary
     super(
       'Name'        => 'Splunk Scanner',
       'Description' => 'This module scans for Splunk instances.',
-      'Author'       => ['ExploitHub'],
-      'License'     => 'ExploitHub'
+      'Author'       => ['VolatileMinds'],
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

@@ -21,7 +21,7 @@ the usernames and password hashes for the application users.},
         ],
       'Author'         =>
         [
-          'ExploitHub'
+          'VolatileMinds'
         ],
       'License'        => MSF_LICENSE,
       'DisclosureDate' => ""

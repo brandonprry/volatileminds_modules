@@ -16,7 +16,7 @@ class MetasploitModule < Msf::Auxiliary
       This module attempts to exploit an unauthenticated SQL injection in order
       to read an arbitrary file from the file system.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry'

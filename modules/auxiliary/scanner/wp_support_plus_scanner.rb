@@ -18,9 +18,9 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'Wordpress Support Plus Responsive Ticket System Scanner',
       'Description' => 'This module scans for instances of the Support Plus Responsive Ticket Scanner plugin for Wordpress.',
       'Author'       => [
-        'ExploitHub'
+        'VolatileMinds'
        ],
-      'License'     => 'ExploitHub'
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

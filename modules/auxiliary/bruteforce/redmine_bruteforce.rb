@@ -103,7 +103,7 @@ class MetasploitModule < Msf::Auxiliary
         'Author'         =>
           [
           ],
-        'License'        => 'ExploitHub',
+        'License'        => 'VolatileMinds',
         'References'     =>
           [
           ],

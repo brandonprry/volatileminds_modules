@@ -21,7 +21,7 @@ class MetasploitModule < Msf::Auxiliary
 
       This is a common misconfiguration.
       },
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module

@@ -25,7 +25,7 @@ class MetasploitModule < Msf::Auxiliary
         [
           'bperry'
         ],
-      'License'        => 'ExploitHub',
+      'License'        => 'VolatileMinds',
       'DisclosureDate' => "Jul 7 2015"
     ))
 

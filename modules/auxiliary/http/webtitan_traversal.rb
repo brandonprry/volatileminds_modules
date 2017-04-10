@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Auxiliary
       Version: 4.01 Build 148) as well as a directory traversal attack in order
       to read an arbitrary file from the file system as the user the web server runs as.
       },
-      'License'        => "ExploitHub",
+      'License'        => "VolatileMinds",
       'Version' => "1",
       'Author'         =>
         [],
