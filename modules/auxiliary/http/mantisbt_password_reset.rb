@@ -20,7 +20,8 @@ class MetasploitModule < Msf::Auxiliary
       },
       'References'     =>
         [
-          ['CVE', '2017-7615']
+          ['CVE', '2017-7615'],
+          ['URL', 'https://asciinema.org/a/7s0rzksynoq2zh44m5i1lprou']
         ],
       'Author'         =>
         [
