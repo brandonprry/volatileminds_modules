@@ -15,8 +15,8 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => '',
-      'Description' => '',
+      'Name'        => 'Empty Scanner Module',
+      'Description' => 'This is a description for an empty scanner module',
       'Author'       => [],
       'License'     => 'VolatileMinds'
     )

@@ -52,6 +52,7 @@ class MetasploitModule < Msf::Auxiliary
     super(
         'Name'           => 'Empty Login Scanner',
         'Description'    => %q(
+        This is a description for a login scanner.
       ),
         'Author'         =>
           [

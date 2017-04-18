@@ -12,8 +12,10 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => '',
+      'Name'           => 'Empty Auxiliar Module',
       'Description'    => %q{
+    This is a descrption for an auxiliary module. Also lists
+    the version tested.
       },
       'References'     =>
         [
