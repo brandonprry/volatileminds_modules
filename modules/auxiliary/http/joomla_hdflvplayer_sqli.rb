@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla HD FLV Player Unauthenticated SQL Injection User Enumeration',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in Joomla HD FLV Player 2.1.0.1
       in order to pull out the usernames, password hashes, and email addresses from the database

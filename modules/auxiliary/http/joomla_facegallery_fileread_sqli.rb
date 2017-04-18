@@ -12,7 +12,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla Face Gallery 1.0 Unauthenticated SQL Injection Arbitrary File Read',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file on the server on vulnerable instances.
 
       This module will attempt exploit an unauthenticated SQL injection in the Face Gallery 1.0
       plugin for Joomla in order to read an arbitrary file from the file system. A slightly

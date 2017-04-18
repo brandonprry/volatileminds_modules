@@ -13,14 +13,15 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info={})
     super(update_info(info,
       'Name'           => "Contus Video Gallery for Wordpress Unauthenticated SQL Injection User Enumeration",
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Wordpress usernames and password hashes from vulnerable instance.
+
       This module exploits a UNION-based unauthenticated SQL injection within version 2.7
       of Contus Video Gallery in order to enumerate the users table.
       },
       'License'        => 'VolatileMinds',
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module
+          'Brandon Perry' 
         ],
       'References'     =>
         [

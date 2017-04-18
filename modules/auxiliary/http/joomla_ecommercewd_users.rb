@@ -12,7 +12,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info={})
     super(update_info(info,
       'Name'           => "Joomla E-Commerce WD Plugin Users Enumeration via SQL injection",
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates usernames and password hasesh on vulnerable instances.
 
       This module attempts to exploit an unauthenticated SQL injection in order to 
       enumerate the Joomla users table.

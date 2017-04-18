@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla Spider Contacts SQL Injection Arbitrary File Read',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
         This module exploits a SQL injection in version 1.3.6 and probably prior of
         Spider Contacts, a Joomla extension. In order to use this auxiliary module,

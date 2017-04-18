@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla! AJAX shoutbox Arbitrary File Read via Unauthenticated SQL injection',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module exploits a SQL injection in version 1.6 of AJAX shoutbox for Joomla! 2.5
       in order to attempt reading a file from the file system. This likely requires a slightly

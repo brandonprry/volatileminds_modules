@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla Youtube Gallery Unauthenticated SQLi User Enumeration',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Joomla usernames and passwords hashes from the vulnerable instance.
 
       This module exploits an unauthenticated SQL injection in Joomla Youtube Gallery
       in order to enumerate the users table in the database. Tested against version 4.1.7.

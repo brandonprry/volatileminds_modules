@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla AdminExile Unauthenticated Arbitrary File Read via SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module attempts to read an arbitrary file from the file system using an unauthenticated
       SQL injection. A slightly misconfigured database is likely required in that the database

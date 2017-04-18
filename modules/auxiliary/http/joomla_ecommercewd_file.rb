@@ -12,7 +12,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info={})
     super(update_info(info,
       'Name'           => "Joomla E-Commerce WD Plugin File Download via SQL injection",
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module attempts to exploit an unauthenticated SQL injection in order
       to read an arbitrary file from the file system.

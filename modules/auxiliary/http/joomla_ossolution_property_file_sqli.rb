@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info={})
     super(update_info(info,
                       'Name'           => " OS Solution OSProperty 2.8.0 for Joomla! Unauthenticated SQL Injection Arbitrary File Read",
-      'Description'    => %q{
+                      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in OS Solution OSProperty for Joomla!
       in order to attempt reading an arbitrary file on the web server with the permissions of the

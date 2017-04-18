@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Joomla! AJAX Shoutbox User/Password Hash Enumeration via Unauthenticated SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module will exploit an unauthenticated SQL injection in Joomla! AJAX Shoutbox 1.6
       for Joomla! version 2.5 in order to pull the usernames and password hashes from the database

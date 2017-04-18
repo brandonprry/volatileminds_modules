@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Wordpress SP Document Manager Unauthenticated User/Hashes Enumeration via SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Wordpress usernames and password hashes from the vulnerable instance.
 
       This module exploits an unauthenticated SQL injection in order to pull out the users and their password
       hashes from the wordpress database.

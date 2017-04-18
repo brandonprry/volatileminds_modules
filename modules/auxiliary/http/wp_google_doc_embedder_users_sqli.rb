@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Wordpress Google Documents Embedder Unauthenticated User/Hash Enum via SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Wordpress usernames and password hashes on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in Google Documents Embedder v2.5.14
       in order to pull the users and their password hashes from the database

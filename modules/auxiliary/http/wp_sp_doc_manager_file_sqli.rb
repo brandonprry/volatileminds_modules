@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Wordpress SP Client Document Manager Arbitrary File Read via SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module reads file from the file system of the vulnerable instance.
 
       This module exploits an unauthenticated SQL injection in order to read a file from the file
       system with permissions of the web server user. Likely requires a slightly misconfigured

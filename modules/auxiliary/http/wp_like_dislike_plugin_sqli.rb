@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Wordpress Like/Dislike Counter for Posts, Pages and Comments Plugin SQL Injection',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module exploits a SQL injection in version 1.2.3 and likely prior in both the Lite and Pro 
       version of the Like/Dislike Counter for Posts, Pages, and Comments plugin available for Wordpress

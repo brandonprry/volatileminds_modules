@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Unauthenticated SQL Injection in Gallery WD for Joomla! File Read',
-      'Description'    => %q{
+      'Description'    => %q{This module reads a file fro mthe file system on vulnerable instances.
 
       This module will attempt to read a given file from the file system using an
       unauthenticated SQL injection in Gallery WD for Joomla! 1.2.5 and likely prior.

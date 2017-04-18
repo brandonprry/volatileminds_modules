@@ -14,7 +14,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Unauthenticated SQL Injection Gallery WD for Joomla! User Enumeration',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates usernames and passwords hashes on vulnerable instances.
 
       This module will enumerate users from a Joomla! database using an unauthenticated SQL injection
       within Gallery WD for Joomla! 1.2.5.

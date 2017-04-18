@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'Wordpress CP MultiView Event Calendar Unauthenticated User/Hashes Enumeration via SQLi',
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Wordpress usernames and passwords hashes on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in version 1.01 in order to pull out the users and their password
       hashes from the wordpress database.

@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info={})
     super(update_info(info,
       'Name'           => "OS Solution OSProperty 2.8.0 for Joomla! Unauthenticated SQL Injection User Enumeration",
-      'Description'    => %q{
+      'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module will exploit an unauthenticated SQL injection in OS Solution OSProperty 2.8.0
       for Joomla! in order to enumerate usernames and password hashes from the Joomla! database
@@ -21,7 +21,7 @@ class MetasploitModule < Msf::Auxiliary
       'License'        => 'VolatileMinds',
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module
+          'Brandon Perry'
         ],
       'References'     =>
         [
