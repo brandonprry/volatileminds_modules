@@ -14,8 +14,12 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Empty Auxiliar Module',
       'Description'    => %q{
-    This is a descrption for an auxiliary module. Also lists
+    This is a short descrption for an auxiliary module. Also lists
     the version tested.
+
+    A longer description after the short description goes into more
+    detail about the module, the vulnerbaility, or whatever information
+    is useful to provide for documentation purposes.
       },
       'References'     =>
         [
