@@ -21,8 +21,8 @@ class MetasploitModule < Msf::Auxiliary
       'Author'         =>
         [
         ],
-      'License'        => MSF_LICENSE,
-      'DisclosureDate' => ""
+      'License'        => 'VolatileMinds',
+      'DisclosureDate' => ''
     ))
 
     register_options(

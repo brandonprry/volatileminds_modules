@@ -56,7 +56,7 @@ class MetasploitModule < Msf::Auxiliary
         'Author'         =>
           [
           ],
-        'License'        => MSF_LICENSE,
+        'License'        => 'VolatileMinds',
         'References'     =>
           [
           ],
