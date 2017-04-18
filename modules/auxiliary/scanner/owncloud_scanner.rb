@@ -16,7 +16,14 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'ownCloud Scanner',
-      'Description' => 'This module scans for ownCloud instances',
+      'Description' => %q{
+This module scans for ownCloud instances.
+
+The ownCloud software suite allows a user to easily spin up
+a free Dropbox alternative. They can be used for file sharing
+or general backup purposes. As such, they can be a gold mine of 
+information.
+},
       'Author'       => [],
       'License'     => 'VolatileMinds'
     )

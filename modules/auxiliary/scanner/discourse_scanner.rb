@@ -16,7 +16,13 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'Discourse Forums Scanner',
-      'Description' => 'This module scans for instances of Discourse forums',
+      'Description' => %q{
+      This module scans for instances of Discourse forums.
+
+      Discourse is a popular open source forums software written in Ruby.
+      Internal forum instances often have protected areas with sensitive
+      internal network information.
+},
       'Author'       => [],
       'License'     => 'VolatileMinds'
     )

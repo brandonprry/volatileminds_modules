@@ -13,7 +13,10 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'TeamPass Password Manager Unauthenticated SQL Injection',
-      'Description'    => %q{This module exploits an unauthenticated error-based SQL injection
+      'Description'    => %q{
+    This module retrieves usernames and password hashes on vulnerable instances of TeamPass.
+
+This module exploits an unauthenticated error-based SQL injection
 in version 2.1.26.8 and likely prior in order to retrieve
 the usernames and password hashes for the application users.},
       'References'     =>

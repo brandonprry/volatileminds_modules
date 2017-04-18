@@ -79,6 +79,12 @@ class MetasploitModule < Msf::Auxiliary
         'Name'           => 'Citrix XenMobile Server Bruteforce',
         'Description'    => %q(
         This module will bruteforce credentials on an instance of Citrix XenMobile server.
+
+        The Citrix XenMobile server allows a business to have a central management
+        and user interface for managing mobile devices that employees or guests
+        may bring on a wireless enterprise network. Weak credentials may grant
+        an attacker access to mobile device information for a given network, 
+        as well as user information.
         ),
         'Author'         =>
           [

@@ -15,13 +15,14 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Unauthenticated SQL Injection in Gallery WD for Joomla! File Read',
       'Description'    => %q{
+
       This module will attempt to read a given file from the file system using an
       unauthenticated SQL injection in Gallery WD for Joomla! 1.2.5 and likely prior.
       },
       'License'        => MSF_LICENSE,
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module
+          'Brandon Perry',
         ],
       'References'     =>
         [

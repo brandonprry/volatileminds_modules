@@ -15,6 +15,8 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Raritan PowerIQ Unauthenticated Hidden Administrator Credential Addition',
       'Description'    => %q{
+      This module attempts to add a hidden admin in vulnerable Raritan PowerIQ instances.
+
       This module exploits an unauthenticated stacked SQL injection to add a administrator user to
       Raritan PowerIQ versions 4.2.1 and 4.1.0 (and possibly previous versions)
       },

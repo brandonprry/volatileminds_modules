@@ -16,7 +16,13 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'Wordpress Support Plus Responsive Ticket System Scanner',
-      'Description' => 'This module scans for instances of the Support Plus Responsive Ticket Scanner plugin for Wordpress.',
+      'Description' => %q{
+This module scans for instances of the Support Plus Responsive Ticket Scanner plugin for Wordpress.
+
+Ticket systems can often store sensitive information regarding customers or customer service representatives.
+Since Wordpress is often a base for small- or medium-sized businesses, vulnerabilities in the plugin
+may yield greater access to the full Wordpress database.
+},
       'Author'       => [
         'VolatileMinds'
        ],

@@ -75,7 +75,12 @@ class MetasploitModule < Msf::Auxiliary
     super(
         'Name'           => 'ownCloud Login Scanner',
         'Description'    => %q(
-        This module attempts to bruteforce credentials on an ownCloud instance
+        This module attempts to bruteforce credentials on an ownCloud instance.
+
+        The ownCloud software suite allows users to easily spin up an alternative
+        to DropBox and other similar file-sharing and backup services. Weak credentials
+        on an ownCloud instance may yiel greater access to sensitive information or
+        backups.
       ),
         'Author'         =>
           [

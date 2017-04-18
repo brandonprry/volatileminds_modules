@@ -15,9 +15,9 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Joomla Youtube Gallery Unauthenticated SQLi Arbitrary File Read',
       'Description'    => %q{
+
       This module exploits an unauthenticated SQL injection in Joomla Youtube Gallery
       in order to read an arbitrary file from the file system. Tested against version 4.1.7.
-
       This likely requires a slightly misconfigured database in that the database user must
       have the FILE permissions.
       },

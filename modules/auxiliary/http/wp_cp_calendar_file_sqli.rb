@@ -14,10 +14,10 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Wordpress CP MultiView Event Calendar Arbitrary File Read via SQLi',
       'Description'    => %q{
+
       This module exploits an unauthenticated SQL injection in order to read a file from the file
       system with permissions of the web server user. Likely requires a slightly misconfigured
       database in the that the DB user used by the Wordpress installation must have FILE permissions.
-
       This is a common misconfiguration
       },
       'References'     =>

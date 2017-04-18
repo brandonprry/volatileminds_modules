@@ -13,6 +13,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Joomla Face Gallery 1.0 Unauthenticated SQL Injection Arbitrary File Read',
       'Description'    => %q{
+
       This module will attempt exploit an unauthenticated SQL injection in the Face Gallery 1.0
       plugin for Joomla in order to read an arbitrary file from the file system. A slightly
       misconfigured SQL instance is likely required in that the MySQL user will need

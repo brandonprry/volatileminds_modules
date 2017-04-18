@@ -14,6 +14,8 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'MantisBT Arbitrary Password Reset',
       'Description'    => %q{
+    This module will reset an arbitrary user's password on vulnerable MantisBT instances.
+
     This module exploits a flaw in the MantisBT password reset workflow
     that allows an unauthenticated user to change any user's password.
     Tested against 2.3.0.

@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => "OS Solution OSProperty 2.8.0 for Joomla! Unauthenticated SQL Injection User Enumeration",
       'Description'    => %q{
+
       This module will exploit an unauthenticated SQL injection in OS Solution OSProperty 2.8.0
       for Joomla! in order to enumerate usernames and password hashes from the Joomla! database
       },

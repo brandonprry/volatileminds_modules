@@ -15,6 +15,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Wordpress Google Documents Embedder Unauthenticated User/Hash Enum via SQLi',
       'Description'    => %q{
+
       This module exploits an unauthenticated SQL injection in Google Documents Embedder v2.5.14
       in order to pull the users and their password hashes from the database
       },

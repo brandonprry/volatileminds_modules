@@ -99,6 +99,12 @@ class MetasploitModule < Msf::Auxiliary
     super(
         'Name'           => 'Redmine Login Scanner',
         'Description'    => %q(
+        This module bruteforces weak credentials on a Redmine instance.
+
+        Redmine is a popular open source bug tracking software that allows
+        software projects to easily manage features and bug reports. Weak credentials
+        in bug tracking software can often yield sensitive information such as
+        potential network weak spots, internal credentials, or internal high value targets.
         ),
         'Author'         =>
           [

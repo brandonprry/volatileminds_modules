@@ -14,7 +14,9 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Cart Engine 3 Unauthenticated SQL Injection Admin/Password Hash Retrieval',
       'Description'    => %q{
-      Thie module exploits an unauthenticated SQL injection in cart.php in order to enumerate admin
+This module exploits a SQL injection in Cart Engine 3
+
+      This module exploits an unauthenticated SQL injection in cart.php in order to enumerate admin
       usernames and their SHA-512 password hashes.
       },
       'References'     =>

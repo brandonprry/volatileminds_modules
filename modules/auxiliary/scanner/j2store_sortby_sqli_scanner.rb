@@ -16,9 +16,12 @@ class Metasploit4 < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'J2Store for Joomla! Error-based SQL injection scanner',
-      'Description' => 'This module will exploit an error-based SQL injection
+      'Description' => %q{
+      This module scans for vulnerable J2store Joomla instances.
+
+This module will exploit an error-based SQL injection
       in order to determine if a given instance of Joomla is vulnerable to a
-      SQL injection vulnerability present in version 3.1.6 of J2Store and earlier.',
+      SQL injection vulnerability present in version 3.1.6 of J2Store and earlier.},
       'Author'       => ['bperry'],
       'License'     => 'VolatileMinds'
     )

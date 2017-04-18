@@ -16,7 +16,15 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'Splunk Scanner',
-      'Description' => 'This module scans for Splunk instances.',
+      'Description' => %q{
+This module scans for Splunk instances.
+
+Splunk is a popular SIEM used by hobbyists and
+enterprises alike for log management and retention.
+Because of the number of logs often being stored,
+access to Splunk can often gain greater foothold
+into a network.
+},
       'Author'       => ['VolatileMinds'],
       'License'     => 'VolatileMinds'
     )

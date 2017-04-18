@@ -16,7 +16,12 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'Citrix XenMobile Server Scanner',
-      'Description' => 'This module scans for instances of Citrix XenMobile Server.',
+      'Description' => %q{
+      This module scans for instances of Citrix XenMobile Server.
+
+      Citrix XenMobile servers allow an enterprise to granularly
+      manage what mobile devices are allowed on the enterprise network.
+},
       'Author'       => [
         'VolatileMinds'
        ],

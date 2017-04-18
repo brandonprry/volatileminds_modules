@@ -12,8 +12,10 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'CartEngine 3 Unauthenticated Arbitrary File Read',
+      'Name'           => 'Cart Engine 3 Unauthenticated Arbitrary File Read',
       'Description'    => %q{
+This module exploits a SQL injection in Cart Engine 3 in order to read a file.
+
       This module exploits an unauthenticated SQL injection in order to attempt
       reading an arbitrary file from the file system. A slightly misconfigured
       MySQL user is required in that the MySQL user must have FILE permissions.

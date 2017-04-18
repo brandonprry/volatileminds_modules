@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => "Wordpress Photo Gallery Unauthenticated SQL Injection User Enumeration",
       'Description'    => %q{
+
       This module exploits an unauthenticated SQL injection in order to enumerate the Wordpress
       users tables, including password hashes. This module was tested against version 1.2.7.
       },

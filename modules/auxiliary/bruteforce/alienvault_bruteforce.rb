@@ -67,8 +67,15 @@ class MetasploitModule < Msf::Auxiliary
     super(
         'Name'           => 'AlienVault Login Scanner',
         'Description'    => %q(
-        This modules attempts to bruteforce credentials on an
+        This module attempts to bruteforce credentials on an
         AlienVault instance.
+
+        The AlienVault OSSIM web application allows a system 
+        admin to have a central resource for scanning for and
+        organizing vulnerability information. Weak credentials
+        allow an attacker to access much greater information 
+        about a given network configuration and potential weak
+        spots or high value targets.
       ),
         'Author'         =>
           [

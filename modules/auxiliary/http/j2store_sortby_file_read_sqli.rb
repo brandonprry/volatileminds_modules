@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'J2Store for Joomla! Arbitrary File Read via SQL injection',
       'Description'    => %q{
+
       This module will attempt to exploit an error-based SQL injection in J2Store version
       3.1.6 and likely earlier in order to read an arbitrary file from the server's file
       system with the privileges of the MySQL user.

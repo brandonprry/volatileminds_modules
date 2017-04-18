@@ -13,6 +13,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => "MyBB Username/Salt/Password hash/Email Enumeration via Unathenticated SQL injection",
       'Description'    => %q{
+
       This module will exploit an unauthenticated SQL injection in version 1.8.1 of MyBB
       in order to enumerate all the users, emails, salts, and password hashes and save
       them into a CSV file.

@@ -84,7 +84,11 @@ class MetasploitModule < Msf::Auxiliary
     super(
         'Name'           => 'Discourse Forums Login Scanner',
         'Description'    => %q(
-        This module bruteforces Discourse Forums credentials
+        This module bruteforces Discourse Forums credentials.
+
+        Discourse is an open source forum project written in Ruby.
+        Weak credentials may yield deeper access into protected forums
+        or administrative functionality.
       ),
         'Author'         =>
           [

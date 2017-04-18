@@ -16,6 +16,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'        => 'OS Solution OSProperty for Joomla! Unauthenticated SQL Injection Scanner',
       'Description' => %q{
+
       This module will scan for Joomla! instances that are vulnerable to an unauthenticated
       UNION-based SQL injection in version 2.8.0 of OS Solution OSProperty for Joomla! extenstion
       },

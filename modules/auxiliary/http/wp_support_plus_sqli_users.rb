@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Wordpress Support Plus Responsive Ticket System SQL Injection',
       'Description'    => %q{
+
     This module exploits an authenticated SQL injection in order to retrieve
     usernames and password hashes from the Wordpress database. Any user credential
     can be used, not just admin.

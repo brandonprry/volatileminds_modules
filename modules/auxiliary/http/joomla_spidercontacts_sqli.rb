@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Joomla Spider Contacts SQL Injection Arbitrary File Read',
       'Description'    => %q{
+
         This module exploits a SQL injection in version 1.3.6 and probably prior of
         Spider Contacts, a Joomla extension. In order to use this auxiliary module,
         the MySQL user performing the query that is vulnerable to injection must

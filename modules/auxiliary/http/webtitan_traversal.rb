@@ -14,6 +14,8 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => "WebTitan Authenticated Arbitrary File Read",
       'Description'    => %q{
+    This module attempts to download a file from a vulnerable WebTitan instance.
+
       This module takes advantage of an authorization flaw in WebTitan (tested against
       Version: 4.01 Build 148) as well as a directory traversal attack in order
       to read an arbitrary file from the file system as the user the web server runs as.

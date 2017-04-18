@@ -68,6 +68,11 @@ class MetasploitModule < Msf::Auxiliary
         'Name'           => 'Splunk Login Scanner',
         'Description'    => %q(
         This module will bruteforce credentials on a Splunk instance.
+
+        Splunk is a popular SIEM solution used by hobbyists and
+        enterprises alike for log management and retention. Weak credentials
+        on a Splunk instance can yield great insight into network logs,
+        but can also yield remote shells on the Splunk instance.
       ),
         'Author'         =>
           [

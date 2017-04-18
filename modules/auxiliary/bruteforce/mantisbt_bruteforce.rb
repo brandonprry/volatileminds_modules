@@ -77,6 +77,10 @@ class MetasploitModule < Msf::Auxiliary
         'Name'           => 'MantisBT Credential Bruteforce',
         'Description'    => %q(
         This module attempts to bruteforce credentials for a MantisBT bug tracking system.
+
+        MantisBT is a popular open source bug tracking software written in PHP.
+        Weak credentials in bug tracking software often can be a gold mine of sensitive information
+        regarding software bugs, internal company passwords, or internal high valu targets.
       ),
         'Author'         =>
           [

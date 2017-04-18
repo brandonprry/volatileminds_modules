@@ -16,7 +16,13 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'MantisBT Scanner',
-      'Description' => 'This module scans for instances of MantisBT open source bug tracking software.',
+      'Description' => %q{
+      This module scans for instances of MantisBT open source bug tracking software.
+
+      MantisBT is a popular open source bug tracking software written in PHP.
+      Gaining access to bug tracking software can often lead to sensitive information
+      such as weak spots in the network, credentials, or high value targets.
+},
       'Author'       => [],
       'License'     => 'VolatileMinds'
     )

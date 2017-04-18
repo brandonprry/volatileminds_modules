@@ -15,10 +15,18 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => '',
-      'Description' => '',
+      'Name'        => 'Redmine Scanner',
+      'Description' => %q{
+      This module scans for Redmine instances.
+
+      Redmine is a popular open source bug tracking that allows
+      anyone to easily track feature development and bugs. Bug
+      tracking software can often be a gold mine of sensitive
+      internal network information such as credentials or 
+      high value targets.
+},
       'Author'       => [],
-      'License'     => MSF_LICENSE
+      'License'     => 'VolatileMinds'
     )
 
     register_options(

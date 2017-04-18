@@ -15,13 +15,14 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Unauthenticated SQL Injection Gallery WD for Joomla! User Enumeration',
       'Description'    => %q{
+
       This module will enumerate users from a Joomla! database using an unauthenticated SQL injection
       within Gallery WD for Joomla! 1.2.5.
       },
       'License'        => MSF_LICENSE,
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module
+          'Brandon Perry',
         ],
       'References'     =>
         [

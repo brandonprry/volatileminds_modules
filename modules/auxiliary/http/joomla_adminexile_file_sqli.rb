@@ -14,6 +14,7 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Joomla AdminExile Unauthenticated Arbitrary File Read via SQLi',
       'Description'    => %q{
+
       This module attempts to read an arbitrary file from the file system using an unauthenticated
       SQL injection. A slightly misconfigured database is likely required in that the database
       user must have the FILE permission in order to read files. This is a common misconfiguration.

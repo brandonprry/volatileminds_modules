@@ -18,9 +18,16 @@ class MetasploitModule < Msf::Auxiliary
   def initialize
     super(
       'Name'        => 'TeamPass Password Manager Scanner',
-      'Description' => 'This module scans for TeamPass Password Manager instances',
+      'Description' => %q{
+This module scans for TeamPass Password Manager instances.
+
+TeamPass Password Manager is a popular open source password manager
+meant for password sharing between teams of people, often used in an
+enterprise environment. Gaining access to the password manager can
+yield the keys to the kingdom so to speak.
+      },
       'Author'       => ['VolatileMinds'],
-      'License'     => MSF_LICENSE
+      'License'     => 'VolatileMinds'
     )
     register_options(
       [
