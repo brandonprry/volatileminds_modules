@@ -17,12 +17,24 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{This module enumerates Wordpress usernames and password hashes on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in Google Documents Embedder v2.5.14
-      in order to pull the users and their password hashes from the database
+      in order to pull the users and their password hashes from the database.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>', #metasploit module
+          'Brandon Perry',
         ],
       'References'     =>
         [

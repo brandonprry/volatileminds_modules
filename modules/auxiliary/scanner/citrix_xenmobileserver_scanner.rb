@@ -21,6 +21,18 @@ class MetasploitModule < Msf::Auxiliary
 
       Citrix XenMobile servers allow an enterprise to granularly
       manage what mobile devices are allowed on the enterprise network.
+
+      Categories: Enterprise
+
+      Price: 0
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
 },
       'Author'       => [
         'VolatileMinds'

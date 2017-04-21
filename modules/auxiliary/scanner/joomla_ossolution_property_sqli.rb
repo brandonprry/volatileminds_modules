@@ -18,7 +18,19 @@ class MetasploitModule < Msf::Auxiliary
       'Description' => %q{This module scans for vulnerable instances of the OSProperty Joomla plugin.
 
       This module will scan for Joomla! instances that are vulnerable to an unauthenticated
-      UNION-based SQL injection in version 2.8.0 of OS Solution OSProperty for Joomla! extenstion
+      UNION-based SQL injection in version 2.8.0 of OS Solution OSProperty for Joomla! extenstion.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 0
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'Author'       =>
         [

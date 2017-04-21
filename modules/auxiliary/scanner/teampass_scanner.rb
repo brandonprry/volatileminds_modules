@@ -25,6 +25,18 @@ TeamPass Password Manager is a popular open source password manager
 meant for password sharing between teams of people, often used in an
 enterprise environment. Gaining access to the password manager can
 yield the keys to the kingdom so to speak.
+
+Categories: Enterprise
+
+Price: 0
+
+Video: none
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
       },
       'Author'       => ['VolatileMinds'],
       'License'     => 'VolatileMinds'

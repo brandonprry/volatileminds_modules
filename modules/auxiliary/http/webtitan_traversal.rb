@@ -19,6 +19,18 @@ class MetasploitModule < Msf::Auxiliary
       This module takes advantage of an authorization flaw in WebTitan (tested against
       Version: 4.01 Build 148) as well as a directory traversal attack in order
       to read an arbitrary file from the file system as the user the web server runs as.
+
+      Categories: Enterprise
+
+      Price: 3
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => "VolatileMinds",
       'Version' => "1",

@@ -24,6 +24,18 @@ class MetasploitModule < Msf::Auxiliary
       tracking software can often be a gold mine of sensitive
       internal network information such as credentials or 
       high value targets.
+
+      Categories: Open Source
+
+      Price: 0
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
 },
       'Author'       => [],
       'License'     => 'VolatileMinds'

@@ -17,6 +17,18 @@ class MetasploitModule < Msf::Auxiliary
 
       This module exploits a UNION-based unauthenticated SQL injection within version 2.7
       of Contus Video Gallery in order to enumerate the users table.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

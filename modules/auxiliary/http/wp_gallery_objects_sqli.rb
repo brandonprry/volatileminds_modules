@@ -18,6 +18,18 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits a SQL injection in version 0.4 of Gallery Objects, a plugin for
       Wordpress. A blind boolean injection attack is used to read an arbitrary file
       off of the file system with the permissions of the SQL user.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

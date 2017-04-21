@@ -16,7 +16,19 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{This module reads a file from the file system on vulnerable instances.
 
       This module exploits a SQL injection in version 1.2.3 and likely prior in both the Lite and Pro 
-      version of the Like/Dislike Counter for Posts, Pages, and Comments plugin available for Wordpress
+      version of the Like/Dislike Counter for Posts, Pages, and Comments plugin available for Wordpress.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

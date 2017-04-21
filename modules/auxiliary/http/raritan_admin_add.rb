@@ -18,7 +18,19 @@ class MetasploitModule < Msf::Auxiliary
       This module attempts to add a hidden admin in vulnerable Raritan PowerIQ instances.
 
       This module exploits an unauthenticated stacked SQL injection to add a administrator user to
-      Raritan PowerIQ versions 4.2.1 and 4.1.0 (and possibly previous versions)
+      Raritan PowerIQ versions 4.2.1 and 4.1.0 (and possibly previous versions).
+
+      Categories: Enterprise, SQL Injection
+
+      Price: 4
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

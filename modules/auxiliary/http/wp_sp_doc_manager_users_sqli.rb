@@ -17,6 +17,18 @@ class MetasploitModule < Msf::Auxiliary
 
       This module exploits an unauthenticated SQL injection in order to pull out the users and their password
       hashes from the wordpress database.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

@@ -18,6 +18,18 @@ class MetasploitModule < Msf::Auxiliary
       This module will attempt to exploit an error-based SQL injection in J2Store version
       3.1.6 and likely earlier in order to read an arbitrary file from the server's file
       system with the privileges of the MySQL user.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 3
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

@@ -18,6 +18,18 @@ class MetasploitModule < Msf::Auxiliary
       plugin for Joomla in order to read an arbitrary file from the file system. A slightly
       misconfigured SQL instance is likely required in that the MySQL user will need
       to have the FILE permission. This is a common misconfiguration.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

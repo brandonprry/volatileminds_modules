@@ -18,6 +18,18 @@ This module exploits a SQL injection in Cart Engine 3
 
       This module exploits an unauthenticated SQL injection in cart.php in order to enumerate admin
       usernames and their SHA-512 password hashes.
+
+      Categories: SQL Injection
+
+      Price: 4
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

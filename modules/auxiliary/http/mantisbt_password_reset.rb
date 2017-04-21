@@ -19,11 +19,22 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits a flaw in the MantisBT password reset workflow
     that allows an unauthenticated user to change any user's password.
     Tested against 2.3.0.
+
+    Categories: Open Source
+
+    Price: 4
+
+    Video: https://asciinema.org/a/3fzu2rsvff8jjaek9rdwwej0q
+
+    OS: Multi
+
+    Arch: Multi
+
+    Requirements: Metasploit Framework
       },
       'References'     =>
         [
           ['CVE', '2017-7615'],
-          ['URL', 'https://asciinema.org/a/7s0rzksynoq2zh44m5i1lprou']
         ],
       'Author'         =>
         [

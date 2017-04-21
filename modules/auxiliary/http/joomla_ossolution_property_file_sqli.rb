@@ -18,11 +18,23 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits an unauthenticated SQL injection in OS Solution OSProperty for Joomla!
       in order to attempt reading an arbitrary file on the web server with the permissions of the
       SQL database user.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>
         [
-          'Brandon Perry <bperry.volatile[at]gmail.com>' #meatpistol module
+          'Brandon Perry'
         ],
       'References'     =>
         [

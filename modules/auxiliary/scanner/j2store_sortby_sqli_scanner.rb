@@ -21,7 +21,20 @@ class Metasploit4 < Msf::Auxiliary
 
 This module will exploit an error-based SQL injection
       in order to determine if a given instance of Joomla is vulnerable to a
-      SQL injection vulnerability present in version 3.1.6 of J2Store and earlier.},
+      SQL injection vulnerability present in version 3.1.6 of J2Store and earlier.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 0
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
+},
       'Author'       => ['bperry'],
       'License'     => 'VolatileMinds'
     )

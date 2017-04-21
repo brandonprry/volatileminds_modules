@@ -17,7 +17,19 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module will exploit an unauthenticated SQL injection in Joomla! AJAX Shoutbox 1.6
-      for Joomla! version 2.5 in order to pull the usernames and password hashes from the database
+      for Joomla! version 2.5 in order to pull the usernames and password hashes from the database.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

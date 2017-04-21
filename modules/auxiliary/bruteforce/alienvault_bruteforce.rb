@@ -76,6 +76,18 @@ class MetasploitModule < Msf::Auxiliary
         allow an attacker to access much greater information 
         about a given network configuration and potential weak
         spots or high value targets.
+
+        Categories: Enterprise
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       ),
         'Author'         =>
           [

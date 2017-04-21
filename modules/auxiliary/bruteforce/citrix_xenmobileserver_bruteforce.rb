@@ -85,12 +85,24 @@ class MetasploitModule < Msf::Auxiliary
         may bring on a wireless enterprise network. Weak credentials may grant
         an attacker access to mobile device information for a given network, 
         as well as user information.
+
+        Categories: Enterprise
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
         ),
         'Author'         =>
           [
             'Brandon Perry'
           ],
-        'License'        => MSF_LICENSE,
+        'License'        => 'VolatileMinds',
         'References'     =>
           [
             ['URL', 'https://www.citrix.com/downloads/xenmobile.html']

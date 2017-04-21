@@ -20,6 +20,18 @@ class MetasploitModule < Msf::Auxiliary
       in order to read an arbitrary file from the file system. Tested against version 4.1.7.
       This likely requires a slightly misconfigured database in that the database user must
       have the FILE permissions.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

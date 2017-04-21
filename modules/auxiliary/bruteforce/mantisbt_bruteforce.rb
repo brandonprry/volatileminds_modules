@@ -80,7 +80,19 @@ class MetasploitModule < Msf::Auxiliary
 
         MantisBT is a popular open source bug tracking software written in PHP.
         Weak credentials in bug tracking software often can be a gold mine of sensitive information
-        regarding software bugs, internal company passwords, or internal high valu targets.
+        regarding software bugs, internal company passwords, or internal high value targets.
+
+        Categories: Open Source
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       ),
         'Author'         =>
           [

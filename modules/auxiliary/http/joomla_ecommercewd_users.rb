@@ -16,6 +16,18 @@ class MetasploitModule < Msf::Auxiliary
 
       This module attempts to exploit an unauthenticated SQL injection in order to 
       enumerate the Joomla users table.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

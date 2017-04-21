@@ -19,6 +19,18 @@ This module exploits a SQL injection in Cart Engine 3 in order to read a file.
       This module exploits an unauthenticated SQL injection in order to attempt
       reading an arbitrary file from the file system. A slightly misconfigured
       MySQL user is required in that the MySQL user must have FILE permissions.
+
+      Categories: SQL Injection
+
+      Price: 1
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

@@ -73,6 +73,18 @@ class MetasploitModule < Msf::Auxiliary
         enterprises alike for log management and retention. Weak credentials
         on a Splunk instance can yield great insight into network logs,
         but can also yield remote shells on the Splunk instance.
+
+        Categories: Enterprise
+
+        Price: 2
+
+        Video: https://asciinema.org/a/5dtfnqlytl1prfc1y960wxcxy
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       ),
         'Author'         =>
           [

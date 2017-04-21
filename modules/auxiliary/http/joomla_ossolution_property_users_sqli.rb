@@ -16,7 +16,19 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module will exploit an unauthenticated SQL injection in OS Solution OSProperty 2.8.0
-      for Joomla! in order to enumerate usernames and password hashes from the Joomla! database
+      for Joomla! in order to enumerate usernames and password hashes from the Joomla! database.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

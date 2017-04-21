@@ -22,6 +22,18 @@ This module scans for instances of the Support Plus Responsive Ticket Scanner pl
 Ticket systems can often store sensitive information regarding customers or customer service representatives.
 Since Wordpress is often a base for small- or medium-sized businesses, vulnerabilities in the plugin
 may yield greater access to the full Wordpress database.
+
+Categories: Wordpress
+
+Price: 0
+
+Video: none
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
 },
       'Author'       => [
         'VolatileMinds'

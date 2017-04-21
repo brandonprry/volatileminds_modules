@@ -22,6 +22,18 @@ class MetasploitModule < Msf::Auxiliary
       Discourse is a popular open source forums software written in Ruby.
       Internal forum instances often have protected areas with sensitive
       internal network information.
+
+      Categories: Open Source
+
+      Price: 0
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
 },
       'Author'       => [],
       'License'     => 'VolatileMinds'

@@ -81,6 +81,18 @@ class MetasploitModule < Msf::Auxiliary
         to DropBox and other similar file-sharing and backup services. Weak credentials
         on an ownCloud instance may yiel greater access to sensitive information or
         backups.
+
+        Categories: Open Source
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       ),
         'Author'         =>
           [

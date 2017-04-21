@@ -19,6 +19,18 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits a SQL injection in version 1.6 of AJAX shoutbox for Joomla! 2.5
       in order to attempt reading a file from the file system. This likely requires a slightly
       misconfigured database user in that the database user must have the FILE permission. This is a common misconfiguration.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

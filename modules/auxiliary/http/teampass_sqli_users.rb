@@ -18,7 +18,20 @@ class MetasploitModule < Msf::Auxiliary
 
 This module exploits an unauthenticated error-based SQL injection
 in version 2.1.26.8 and likely prior in order to retrieve
-the usernames and password hashes for the application users.},
+the usernames and password hashes for the application users.
+
+Categories: Enterprise, SQL Injection
+
+Price: 5
+
+Video: none
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
+},
       'References'     =>
         [
         ],
@@ -26,7 +39,7 @@ the usernames and password hashes for the application users.},
         [
           'VolatileMinds'
         ],
-      'License'        => MSF_LICENSE,
+      'License'        => 'VolatileMinds',
       'DisclosureDate' => ""
     ))
 

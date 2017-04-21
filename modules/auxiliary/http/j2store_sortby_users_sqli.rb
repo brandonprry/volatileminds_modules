@@ -18,6 +18,18 @@ class MetasploitModule < Msf::Auxiliary
       This module will attempt to exploit an error-based SQL injection in version
       3.1.6 and likely prior of J2Store in order to enumerate users and password
       hashes.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

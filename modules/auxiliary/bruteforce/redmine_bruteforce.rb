@@ -105,6 +105,18 @@ class MetasploitModule < Msf::Auxiliary
         software projects to easily manage features and bug reports. Weak credentials
         in bug tracking software can often yield sensitive information such as
         potential network weak spots, internal credentials, or internal high value targets.
+
+        Categories: Open Source
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
         ),
         'Author'         =>
           [

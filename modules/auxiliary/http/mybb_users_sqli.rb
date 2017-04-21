@@ -17,6 +17,18 @@ class MetasploitModule < Msf::Auxiliary
       This module will exploit an unauthenticated SQL injection in version 1.8.1 of MyBB
       in order to enumerate all the users, emails, salts, and password hashes and save
       them into a CSV file.
+
+      Categories: Open Source
+
+      Price: 1
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'License'        => 'VolatileMinds',
       'Author'         =>

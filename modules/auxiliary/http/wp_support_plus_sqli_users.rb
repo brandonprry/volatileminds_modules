@@ -18,6 +18,18 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits an authenticated SQL injection in order to retrieve
     usernames and password hashes from the Wordpress database. Any user credential
     can be used, not just admin.
+
+    Categories: Wordpress, SQL Injection
+
+    Price: 2
+
+    Video: none
+
+    OS: Multi
+
+    Arch: Multi
+
+    Requirements: Metasploit Framework
       },
       'References'     =>
         [
@@ -27,7 +39,7 @@ class MetasploitModule < Msf::Auxiliary
         [
           'VolatileMinds'
         ],
-      'License'        => MSF_LICENSE,
+      'License'        => 'VolatileMinds',
       'DisclosureDate' => "Dec 12 2016"
     ))
 

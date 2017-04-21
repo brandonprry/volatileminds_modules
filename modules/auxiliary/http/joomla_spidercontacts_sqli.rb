@@ -20,6 +20,18 @@ class MetasploitModule < Msf::Auxiliary
         the MySQL user performing the query that is vulnerable to injection must
         have the FILE permission set. This is often the case with misconfigured
         instances. The patched version did not seem to bump the version.
+
+        Categories: Joomla, SQL Injection
+
+        Price: 2
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       },
       'References'     =>
         [

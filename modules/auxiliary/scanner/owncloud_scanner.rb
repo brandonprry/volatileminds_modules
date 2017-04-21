@@ -23,6 +23,18 @@ The ownCloud software suite allows a user to easily spin up
 a free Dropbox alternative. They can be used for file sharing
 or general backup purposes. As such, they can be a gold mine of 
 information.
+
+Categories: Open Source
+
+Price: 0
+
+Video: none
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
 },
       'Author'       => [],
       'License'     => 'VolatileMinds'

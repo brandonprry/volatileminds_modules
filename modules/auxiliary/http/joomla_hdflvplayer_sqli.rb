@@ -16,7 +16,19 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{This module enumerates Joomla usernames and password hashes on vulnerable instances.
 
       This module exploits an unauthenticated SQL injection in Joomla HD FLV Player 2.1.0.1
-      in order to pull out the usernames, password hashes, and email addresses from the database
+      in order to pull out the usernames, password hashes, and email addresses from the database.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [

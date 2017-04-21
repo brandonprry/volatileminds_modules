@@ -24,6 +24,18 @@ enterprises alike for log management and retention.
 Because of the number of logs often being stored,
 access to Splunk can often gain greater foothold
 into a network.
+
+Categories: Enterprise
+
+Price: 0
+
+Video: https://asciinema.org/a/5dtfnqlytl1prfc1y960wxcxy
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
 },
       'Author'       => ['VolatileMinds'],
       'License'     => 'VolatileMinds'

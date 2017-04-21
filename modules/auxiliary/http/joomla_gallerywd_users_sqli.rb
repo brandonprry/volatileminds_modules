@@ -18,8 +18,20 @@ class MetasploitModule < Msf::Auxiliary
 
       This module will enumerate users from a Joomla! database using an unauthenticated SQL injection
       within Gallery WD for Joomla! 1.2.5.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
-      'License'        => MSF_LICENSE,
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry',

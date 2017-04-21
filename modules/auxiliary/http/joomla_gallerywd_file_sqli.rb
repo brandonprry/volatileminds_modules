@@ -18,8 +18,20 @@ class MetasploitModule < Msf::Auxiliary
 
       This module will attempt to read a given file from the file system using an
       unauthenticated SQL injection in Gallery WD for Joomla! 1.2.5 and likely prior.
+
+      Categories: Joomla, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
-      'License'        => MSF_LICENSE,
+      'License'        => 'VolatileMinds',
       'Author'         =>
         [
           'Brandon Perry',

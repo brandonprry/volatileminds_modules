@@ -18,7 +18,19 @@ class MetasploitModule < Msf::Auxiliary
       This module exploits an unauthenticated SQL injection in order to read a file from the file
       system with permissions of the web server user. Likely requires a slightly misconfigured
       database in the that the DB user used by the Wordpress installation must have FILE permissions.
-      This is a common misconfiguration
+      This is a common misconfiguration.
+
+      Categories: Wordpress, SQL Injection
+
+      Price: 2
+
+      Video: none
+
+      OS: Multi
+
+      Arch: Multi
+
+      Requirements: Metasploit Framework
       },
       'References'     =>
         [
