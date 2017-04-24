@@ -91,7 +91,7 @@ class MetasploitModule < Msf::Auxiliary
 
         OS: Multi
 
-        Archo: Multi
+        Arch: Multi
 
         Requirements: Metasploit Framework
       ),
