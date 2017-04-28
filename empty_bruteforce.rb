@@ -54,9 +54,21 @@ class MetasploitModule < Msf::Auxiliary
         'Description'    => %q(
         This is a short description for a login scanner.
 
-        A longer desription follows the short description, going
+        A longer description follows the short description, going
         into more detail about the product that the module bruteforces
         or other useful information or documentation.
+
+        Categories: Open Source
+
+        Price: 0
+
+        Video: none
+
+        OS: Multi
+
+        Arch: Multi
+
+        Requirements: Metasploit Framework
       ),
         'Author'         =>
           [

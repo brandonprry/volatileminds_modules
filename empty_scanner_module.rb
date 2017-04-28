@@ -22,6 +22,18 @@ This is a short description for an empty scanner module.
 A longer description follows the short description,
 going into more detail about the product that the module
 scans for, the module, or any other useful documentation.
+
+Categories: Open Source
+
+Price: 0
+
+Video: none
+
+OS: Multi
+
+Arch: Multi
+
+Requirements: Metasploit Framework
       },
       'Author'       => [],
       'License'     => 'VolatileMinds'

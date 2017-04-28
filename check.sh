@@ -1,1 +1,1 @@
-for i in `find . | grep rb$`; do ruby -c $i; done
+for i in `find . | grep rb$`; do echo $i; ruby -c $i; done

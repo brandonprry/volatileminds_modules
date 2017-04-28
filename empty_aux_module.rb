@@ -12,7 +12,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'Empty Auxiliar Module',
+      'Name'           => 'Empty Auxiliary Module',
       'Description'    => %q{
     This is a short descrption for an auxiliary module. Also lists
     the version tested.
@@ -20,6 +20,18 @@ class MetasploitModule < Msf::Auxiliary
     A longer description after the short description goes into more
     detail about the module, the vulnerbaility, or whatever information
     is useful to provide for documentation purposes.
+
+    Categories: Open Source
+
+    Price: 0
+
+    Video: none
+
+    OS: Multi
+
+    Arch: Multi
+
+    Requirements: Metasploit Framework
       },
       'References'     =>
         [
