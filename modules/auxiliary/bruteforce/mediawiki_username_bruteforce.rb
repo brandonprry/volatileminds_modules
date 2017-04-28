@@ -99,8 +99,8 @@ class MetasploitModule < Msf::Auxiliary
 
         Arch: Multi
 
-      ),
         Requirements: Metasploit Framework
+        ),
         'Author'         =>
           [
           ],

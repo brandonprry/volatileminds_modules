@@ -28,8 +28,8 @@ Categories: Open Source
 
 Price: 0
 
-
 Video: https://asciinema.org/a/1i106t8uj054ht84rwnd4uegd
+
 OS: Multi
 
 Arch: Multi
