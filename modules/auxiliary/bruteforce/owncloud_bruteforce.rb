@@ -73,7 +73,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'ownCloud Login Scanner',
+        'Name'           => 'ownCloud Login Bruteforce',
         'Description'    => %q(
         This module attempts to bruteforce credentials on an ownCloud instance.
 

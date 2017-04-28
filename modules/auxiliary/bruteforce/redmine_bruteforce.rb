@@ -97,7 +97,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'Redmine Login Scanner',
+        'Name'           => 'Redmine Login Bruteforce',
         'Description'    => %q(
         This module bruteforces weak credentials on a Redmine instance.
 

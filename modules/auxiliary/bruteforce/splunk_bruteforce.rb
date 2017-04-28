@@ -65,7 +65,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'Splunk Login Scanner',
+        'Name'           => 'Splunk Login Bruteforce',
         'Description'    => %q(
         This module will bruteforce credentials on a Splunk instance.
 
