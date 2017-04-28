@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
     super(
       'Name'        => 'GitLab Scanner',
       'Description' => %q{
-This modules scans a network range for GitLab instances.
+This module scans a network range for GitLab instances.
 
 GitLab is a popular open-source version management system,
 with similar features to GitHub. Access to a version control
@@ -28,8 +28,8 @@ Categories: Open Source
 
 Price: 0
 
-Video: https://asciinema.org/a/1i106t8uj054ht84rwnd4uegd
 
+Video: https://asciinema.org/a/1i106t8uj054ht84rwnd4uegd
 OS: Multi
 
 Arch: Multi
