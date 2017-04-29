@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
     super(
       'Name'        => 'b2evolution Scanner Module',
       'Description' => %q{
-This module attempts to bruteforce weak b2evolution credentials.
+This module attempts to find instances of b2evolution on a network.
 
 b2evolution is a popular open-source forums and content management
 system. Gaining credentialed access may lead to vulnerabilities in older
