@@ -13,7 +13,7 @@ class MetasploitModule < Msf::Auxiliary
   def initialize(info = {})
     super(update_info(info,
       'Name'           => 'J2Store for Joomla! User Enumeration via SQL Injection',
-      'Description'    => %q{This module enumerates usernames and password hashes on vulnerable instamces.
+      'Description'    => %q{This module enumerates usernames and password hashes on vulnerable instances.
 
       This module will attempt to exploit an error-based SQL injection in version
       3.1.6 and likely prior of J2Store in order to enumerate users and password
