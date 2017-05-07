@@ -28,7 +28,7 @@ Categories: Enterprise
 
 Price: 0
 
-Video: none
+Video: https://asciinema.org/a/edvi4g2xzjqclqlw094nfz8tg
 
 OS: Multi
 
