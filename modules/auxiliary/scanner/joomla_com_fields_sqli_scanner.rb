@@ -23,7 +23,7 @@ Joomla is a popular open-source CMS used by websites around the world. In versio
 3.7.0 a new component was introduced, com_fields, that was vulnerable to an unauthenticated
 SQL injection. This SQL injection was fixed in version 3.7.1.
 
-Categories: Open Source
+Categories: Open Source, Joomla
 
 Price: 0
 

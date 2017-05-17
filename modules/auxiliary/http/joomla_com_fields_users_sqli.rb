@@ -24,7 +24,7 @@ was fixed in 3.7.1. This module exploits the SQL injection in order to
 pull the current user and password hash information out of the Joomla
 database.
 
-    Categories: Open Source
+    Categories: Open Source, Joomla
 
     Price: 5
 
