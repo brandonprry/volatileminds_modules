@@ -23,6 +23,7 @@ ProcessMaker is a popular open source and enterprise solution for
 managing defined business processes and workflows. Privileged access
 to a ProcessMaker instance may yield significant insight into
 how a business works, key stakeholders, and high value targets.
+Tested against version 3.1.
 
 Categories: Open Source, Enterprise
 

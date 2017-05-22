@@ -90,7 +90,8 @@ class MetasploitModule < Msf::Auxiliary
         ProcessMaker is a popular enterprise software tool to enable businesses to
         manage defined processes for business tasks and workflows. Privileged access
         to a ProcessMaker instance may yield significant insight into internal
-        processes, key stakeholders, and high value targets on the network.
+        processes, key stakeholders, and high value targets on the network. Tested against
+        version 3.1.
 
         Categories: Open Source, Enterprise
 
