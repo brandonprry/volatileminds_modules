@@ -43,7 +43,7 @@ class MetasploitModule < Msf::Auxiliary
 
     register_options(
       [
-        OptString.new('PATH', [ true,  "The test path to find robots.txt file", '/']),
+        OptString.new('PATH', [ true,  "The test path to find the application", '/']),
       ], self.class)
 
   end

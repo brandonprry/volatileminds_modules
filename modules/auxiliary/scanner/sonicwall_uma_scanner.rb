@@ -15,21 +15,20 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => 'ProcessMaker Scanner',
+      'Name'        => 'SonicWall Universal Management Application Scanner',
       'Description' => %q{
-This module attempts to find ProcessMaker instances on the network.
+This module scans for SonicWall Universal Management Application instances.
 
-ProcessMaker is a popular open source and enterprise solution for
-managing defined business processes and workflows. Privileged access
-to a ProcessMaker instance may yield significant insight into
-how a business works, key stakeholders, and high value targets.
-Tested against version 3.1.
+SonicWall Universal Management Application (UMA) is a popular enterprise
+solution for managing SonicWall appliances on the network. Access to a
+UMA instance may yield significant insight into the network perimeter
+and high value targets on the network.
 
-Categories: Open Source, Enterprise
+Categories: Enterprise
 
 Price: 0
 
-Video: https://asciinema.org/a/2drpjphgq6p07xwofqpka53ea
+Video: https://asciinema.org/a/4zqlpvhl6jzbkte7zylsrufnl
 
 OS: Multi
 
@@ -50,16 +49,16 @@ Requirements: Metasploit Framework
 
   def run_host(target_host)
     res = send_request_cgi({
-      'uri' => normalize_uri(datastore['PATH'], '/sysworkflow/en/neoclassic/login/login'),
+      'uri' => datastore['PATH'] + '/appliance/applianceMainPage',
     })
 
-    if res && res.body =~ /Powered by ProcessMaker/i
-      print_good("#{peer} - Found ProcessMaker")
+    if res && res.code == 200 && res.body =~ /SonicWALL UMA Version(.*?)<\/td>/m
+      print_good("#{peer} - Found SonicWALL UMA Version #{$1.strip}")
       report_service({
         host: target_host,
         port: datastore['RPORT'],
-        name: 'ProcessMaker',
-        info: 'ProcessMaker Business Process Management suite'
+        name: 'SonicWALL UMA',
+        info: 'SonicWALL UMA Version ' + $1
       })
     end
   end
