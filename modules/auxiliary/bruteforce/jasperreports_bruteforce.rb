@@ -76,7 +76,7 @@ class MetasploitModule < Msf::Auxiliary
 
         Price: 3
 
-        Video: none
+        Video: https://asciinema.org/a/2kmkklaaqml3t41dc8tmc5ynu
 
         OS: Multi
 
