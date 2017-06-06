@@ -12,18 +12,16 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'Empty Auxiliary Module',
+      'Name'           => 'ProcessMaker Authenticated File Download',
       'Description'    => %q{
-    This is a short descrption for an auxiliary module. Also lists
-    the version tested.
+    This module exploits an authenticated file download vulnerability
+    in ProcessMaker.
 
-    A longer description after the short description goes into more
-    detail about the module, the vulnerbaility, or whatever information
-    is useful to provide for documentation purposes.
+    ProcessMaker is a popular enterprise software tool to enable businesses to manage defined processes for business tasks and workflows. Privileged access to a ProcessMaker instance may yield significant insight into internal processes, key stakeholders, and high value targets on the network. Tested against version 3.1.
 
-    Categories: Open Source
+    Categories: Open Source, Enterprise
 
-    Price: 0
+    Price: 4
 
     Video: none
 
