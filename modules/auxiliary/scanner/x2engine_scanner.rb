@@ -15,13 +15,15 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => 'Empty Scanner Module',
+      'Name'        => 'X2Engine CRM Scanner',
       'Description' => %q{
-This is a short description for an empty scanner module.
+This module scans for instances of X2Engine CRM.
 
-A longer description follows the short description,
-going into more detail about the product that the module
-scans for, the module, or any other useful documentation.
+X2Engine is a powerful open-source CRM for small- or
+medium-sized businesses. Gaining credentialed access
+to X2Engine instances can yield great insight into
+how a business operates, information on potential high
+value targets, and even remote code execution.
 
 Categories: Open Source
 
@@ -41,11 +43,24 @@ Requirements: Metasploit Framework
 
     register_options(
       [
-        OptString.new('PATH', [ true,  "The test path to find robots.txt file", '/']),
+        OptString.new('PATH', [ true,  "The test path to find the X2Engine CRM instance", '/']),
       ], self.class)
 
   end
 
   def run_host(target_host)
+    res = send_request_cgi({
+      'uri' => datastore['PATH'] + (datastore['PATH'][-1] == '/' ? '' : '/') +'index.php/site/login',
+    })
+
+    if res && res.body =~ /<span>X2CRM Version (.*?), <a href="https:\/\/www.x2crm.com">/
+      print_good("#{peer} - Found X2Engine CRM Version #{$1}")
+      report_service({
+        host: target_host,
+        port: datastore['RPORT'],
+        name: 'X2Engine CRM',
+        info: 'X2ENgine CRM Version ' + $1
+      })
+    end
   end
 end
