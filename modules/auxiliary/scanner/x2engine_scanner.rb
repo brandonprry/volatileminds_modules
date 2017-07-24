@@ -18,23 +18,16 @@ class MetasploitModule < Msf::Auxiliary
       'Name'        => 'X2Engine CRM Scanner',
       'Description' => %q{
 This module scans for instances of X2Engine CRM.
-
 X2Engine is a powerful open-source CRM for small- or
 medium-sized businesses. Gaining credentialed access
 to X2Engine instances can yield great insight into
 how a business operates, information on potential high
 value targets, and even remote code execution.
-
 Categories: Open Source
-
 Price: 0
-
 Video: none
-
 OS: Multi
-
 Arch: Multi
-
 Requirements: Metasploit Framework
       },
       'Author'       => [],
