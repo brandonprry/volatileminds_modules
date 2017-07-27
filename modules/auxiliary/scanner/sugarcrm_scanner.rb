@@ -19,7 +19,7 @@ class MetasploitModule < Msf::Auxiliary
       'Description' => %q{
 This module scans for SugarCRM instances.
 
-SugarCRM is a popular open-source enterprise-grade CRM. This modules attempts to find SugarCRM instances
+SugarCRM is a popular open-source enterprise-grade CRM. This module attempts to find SugarCRM instances
 on the network. Tested against 6.5.25.
 
 Categories: Open Source, Enterprise
