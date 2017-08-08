@@ -30,7 +30,7 @@ Categories: Open Source, Wordpress
 
 Price: 0
 
-Video: none
+Video: https://asciinema.org/a/jREcISyvjc3boVmlThtgelw0L
 
 OS: Multi
 
