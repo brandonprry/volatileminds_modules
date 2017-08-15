@@ -17,7 +17,7 @@ class MetasploitModule < Msf::Auxiliary
     super(
       'Name'        => 'JFrog Artifactory Scanner',
       'Description' => %q{
-This module attempts to bruteforce weak credentials on JFrog Artifactory instances.
+This module attempts to find JFrog Artifactory instances on the network.
 
 The JFrog Artifactory repository manager allows developers to manage dependencies and
 other binary data for easy distribution. Privileged access to a JFrog Artifactory instance
