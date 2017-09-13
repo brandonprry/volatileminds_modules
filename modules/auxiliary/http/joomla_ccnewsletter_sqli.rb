@@ -14,9 +14,9 @@ class MetasploitModule < Msf::Auxiliary
     super(update_info(info,
       'Name'           => 'Joomla ccNewsletter SQL Injection',
       'Description'    => %q{
-    This module scans for instances of Joomla with vulnerable ccNewsletter installed.
+    This module exploits instances of Joomla with vulnerable ccNewsletter installed to enumerate usernames and password hashes.
 
-    The ccNewsletter Joomla plugin below version 2.1.10 suffered from an unauthenticated
+    The ccNewsletter Joomla plugin below version 2.2.0 suffered from an unauthenticated
     SQL injection vulnerability. The ccNewletter plugin is a popular plugin used to manage
     newsletters within the Joomla CMS. This module exploits the SQL injection in order
     to enumerate Joomla usernames and password hashes in database.
@@ -25,7 +25,7 @@ class MetasploitModule < Msf::Auxiliary
 
     Price: 4
 
-    Video: none
+    Video: https://asciinema.org/a/9LkuRoes6I8GKoCbC2Nwz5jXx
 
     OS: Multi
 
