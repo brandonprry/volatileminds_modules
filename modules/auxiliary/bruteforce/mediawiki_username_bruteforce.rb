@@ -87,7 +87,7 @@ class MetasploitModule < Msf::Auxiliary
         MediaWiki is a popular open-source content management system and collaborative
         wiki used by busineses, non-profits, and hobbyists alike. Internal or private
         wikis can be a gold mine of sensitive information, high value targets,
-        or network credentials. This is was tested agains 1.28.1.
+        or network credentials. This is was tested against 1.28.1.
 
         Categories: Open Source
 
