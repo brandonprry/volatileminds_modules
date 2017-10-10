@@ -58,7 +58,7 @@ module Metasploit
 
             res = cli.send_recv(req)
 
-            if res.body =~ /Incorrect password entered/
+            if res.body =~ /Incorrect password entered/ || res.body =~ /This user is blocked/
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
