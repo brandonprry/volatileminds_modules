@@ -36,9 +36,13 @@ module Metasploit
             edit_token = $1 if res.body =~ /id="wpEditToken" type="hidden" value="(.*?)"/
             login_token = $1 if res.body =~ /name="wpLoginToken" type="hidden" value="(.*?)"/
 
+            unless edit_token
+              login_token = $1 if res.body =~ /name="wpLoginToken" value="(.*?)"/
+            end
+
             req = cli.request_cgi({
               'method' => 'POST',
-              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'index.php?title=Special:UserLogin&action=submitlogin&type=login',
               'vars_post' => {
                 'wpName' => credential.public,
                 'wpPassword' => credential.private,
@@ -87,7 +91,7 @@ class MetasploitModule < Msf::Auxiliary
         MediaWiki is a popular open-source content management system and collaborative
         wiki used by busineses, non-profits, and hobbyists alike. Internal or private
         wikis can be a gold mine of sensitive information, high value targets,
-        or network credentials. This is was tested agains 1.28.1.
+        or network credentials. This is was tested against 1.28.1, 1.29.1, and 1.23.3.
 
         Categories: Open Source
 
