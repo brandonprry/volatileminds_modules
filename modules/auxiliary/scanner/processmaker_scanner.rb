@@ -44,13 +44,14 @@ Requirements: Metasploit Framework
     register_options(
       [
         OptString.new('PATH', [ true,  "The test path to find the application", '/']),
+        OptString.new('PM_WORKSPACE', [ true, "The ProcessMaker workspace to use", 'workflow'])
       ], self.class)
 
   end
 
   def run_host(target_host)
     res = send_request_cgi({
-      'uri' => normalize_uri(datastore['PATH'], '/sysworkflow/en/neoclassic/login/login'),
+      'uri' => normalize_uri(datastore['PATH'], "/sys#{datastore['PM_WORKSPACE']}/en/neoclassic/login/login"),
     })
 
     if res && res.body =~ /Powered by ProcessMaker/i

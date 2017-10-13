@@ -26,7 +26,7 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'uri' => '/sysworkflow/en/neoclassic/login/login'
+              'uri' => uri[0]+"/sys#{uri[1]}/en/neoclassic/login/login"
             })
 
             res = cli.send_recv(req)
@@ -46,12 +46,12 @@ module Metasploit
 
             req = cli.request_cgi({
               'method' => 'POST',
-              'uri' => '/sysworkflow/en/neoclassic/login/authentication.php',
+              'uri' => uri[0]+"/sys#{uri[1]}/en/neoclassic/login/authentication.php",
               'data' => data.to_s,
               'ctype' => 'multipart/form-data; boundary=' + data.bound,
               'cookie' => cookies,
               'headers' => {
-                'Referer' => '/sysworkflow/en/neoclassic/login/login'
+                'Referer' => uri[0]+"/sys#{uri[1]}/en/neoclassic/login/login"
               }
             })
 
@@ -117,6 +117,12 @@ class MetasploitModule < Msf::Auxiliary
             'STOP_ON_SUCCESS' => true
         }
     )
+
+        register_options(
+        [
+          OptString.new('TARGETURI', [ true,  "The root of the ProcessMaker application", '/']),
+          OptString.new('PM_WORKSPACE', [true, 'The ProcessMaker workspace to use', 'workflow'])
+        ], self.class)
   end
 
   def run_host(ip)
@@ -134,7 +140,7 @@ class MetasploitModule < Msf::Auxiliary
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
-        uri: datastore['TARGETURI'],
+        uri: [datastore['TARGETURI'], datastore['PM_WORKSPACE']],
         cred_details: cred_collection,
         stop_on_success: datastore['STOP_ON_SUCCESS'],
         bruteforce_speed: datastore['BRUTEFORCE_SPEED'],
