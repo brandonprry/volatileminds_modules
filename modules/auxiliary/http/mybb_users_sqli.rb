@@ -11,7 +11,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info={})
     super(update_info(info,
-      'Name'           => "MyBB Username/Salt/Password hash/Email Enumeration via Unathenticated SQL injection",
+      'Name'           => "MyBB Username/Salt/Password hash/Email Enumeration via Unauthenticated SQL injection",
       'Description'    => %q{This module enumerates MyBB usernames and password hashes on vulnerable instances.
 
       This module will exploit an unauthenticated SQL injection in version 1.8.1 of MyBB
