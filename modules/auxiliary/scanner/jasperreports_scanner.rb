@@ -50,7 +50,7 @@ Requirements: Metasploit Framework
 
   def run_host(target_host)
     res = send_request_cgi({
-      'uri' => datastore['PATH'] + '/login.html',
+      'uri' => datastore['PATH'] + '/login.html;jsessionid=',
     })
 
     if res && res.body =~ /<title>TIBCO Jaspersoft: Login<\/title>/
