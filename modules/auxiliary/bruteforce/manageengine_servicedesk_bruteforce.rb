@@ -76,7 +76,7 @@ as network credentials and high-value targets.
 
         Price: 3
 
-        Video: none
+        Video: https://asciinema.org/a/lvpam0pkrHldIRHnPFKetqioB
 
         OS: Multi
 
