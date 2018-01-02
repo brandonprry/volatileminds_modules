@@ -15,20 +15,21 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => 'WebMail Pro PHP Scanner',
+      'Name'        => 'Moodle Scanner',
       'Description' => %q{
-This module scans for WebMail Pro PHP instances on the network.
+This module scans for instances of Moodle on the network.
 
-WebMail Pro is a popular enterprise solution for mail, calendar,
-and file management. Privileged access to a WebMail Pro instance
-could yield significant insight into high value targets in the
-organization or other sensitive information.
+Moodle is a popular open-source learning management system (LMS)
+that enables trainers, educators, and students to manage and use
+industry-standard educational content. Privileged access to
+Moodle instances may yield signficant insight into sensitive
+information such as student names or other material.
 
-Categories: Enterprise
+Categories: Open Source
 
 Price: 0
 
-Video: https://asciinema.org/a/A8FegLrdYJj67pvwqeevMnkt9
+Video: none
 
 OS: Multi
 
@@ -42,7 +43,7 @@ Requirements: Metasploit Framework
 
     register_options(
       [
-        OptString.new('PATH', [ true,  "The test path to find WebMail Pro", '/']),
+        OptString.new('PATH', [ true,  "The test path to find Moodle", '/']),
       ], self.class)
 
   end
@@ -54,21 +55,13 @@ Requirements: Metasploit Framework
         'uri' => path
       })
 
-      if res.body =~ /"ImportingContacts":"https:\\\/\\\/afterlogic.com\\\/docs\\\/webmail/
-        res = send_request_cgi({
-          'uri' => normalize_uri(path, 'VERSION')
-        })
-
-        if res.code == 200
-          version = res.body
-        end
-
-        print_good("#{peer} - Found WebMail Pro PHP " + version)
+      if res && (res.get_cookies =~ /MoodleSession/ || res.body =~ /moodle-has-zindex/)
+        print_good("#{peer} - Found Moodle")
         report_service({
           host: target_host,
           port: datastore['RPORT'],
-          name: 'WebMail Pro',
-          info: 'WebMail Pro PHP v' + version
+          name: 'Moodle',
+          info: 'Moodle LMS'
         })
       end
     end

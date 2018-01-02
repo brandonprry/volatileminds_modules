@@ -76,7 +76,7 @@ organization or other sensitive information.
 
         Price: 3
 
-        Video: none
+        Video: https://asciinema.org/a/sUtvTVBvNGt8MkwKLNNiNAKcQ
 
         OS: Multi
 
