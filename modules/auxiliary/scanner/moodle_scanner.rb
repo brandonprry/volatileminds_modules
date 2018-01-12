@@ -29,7 +29,7 @@ Categories: Open Source
 
 Price: 0
 
-Video: none
+Video: https://asciinema.org/a/W4pNj84hEHvHvIhyXoArQqh41
 
 OS: Multi
 

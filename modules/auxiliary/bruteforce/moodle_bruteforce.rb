@@ -87,7 +87,7 @@ information such as student names or other material.
 
         Price: 2
 
-        Video: none
+        Video: https://asciinema.org/a/W4pNj84hEHvHvIhyXoArQqh41
 
         OS: Multi
 
