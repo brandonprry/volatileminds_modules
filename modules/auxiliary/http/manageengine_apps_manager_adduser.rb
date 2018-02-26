@@ -22,7 +22,7 @@ class MetasploitModule < Msf::Auxiliary
     on a network. Privileged access could yield significant insight
     or leverage into the network. This module exploits an unauthenticated
     SQL injection in order to add a new admin user to the application. This
-    is fixed in vuild version 13610.
+    is fixed in build version 13610.
 
     Categories: Enterprise
 
