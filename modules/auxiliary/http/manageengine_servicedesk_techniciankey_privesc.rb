@@ -17,15 +17,17 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits a privilege escalation vulnerability in order
     to generate an administrator technician key used by the API.
 
-    A longer description after the short description goes into more
-    detail about the module, the vulnerbaility, or whatever information
-    is useful to provide for documentation purposes.
+    ManageEngine ServiceDesk Plus is a popular enterprise solution
+    for managing service requests across an organization or from
+    customers. Privileged access to a Service Plus instance could
+    yield significant insights into sensitive information regarding
+    the organization or a full remote shell.
 
-    Categories: Open Source
+    Categories: Enterprise
 
     Price: 3
 
-    Video: none
+    Video: https://asciinema.org/a/g9Rhocx9TBQqakzb4ScjtV2UO
 
     OS: Multi
 

@@ -69,7 +69,7 @@ class MetasploitModule < Msf::Auxiliary
         This module attempts to bruteforce weak credentials on Jenkins CI instances.
 
         Jenkins CI is a popular open-source and enterprise solution for managing
-        software develeopment lifecycles. Privileged access to Jenkins instances
+        software development lifecycles. Privileged access to Jenkins instances
         could give an attacker significant leverage in a network with access
         to high value targets or sensitive network credentials.
 

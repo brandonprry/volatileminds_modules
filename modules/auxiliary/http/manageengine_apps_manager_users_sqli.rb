@@ -17,15 +17,18 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits an unauthenticated SQL injection in order to
     enumerate usernames and password hashes from the database.
 
-    A longer description after the short description goes into more
-    detail about the module, the vulnerbaility, or whatever information
-    is useful to provide for documentation purposes.
+    ManageEngine Applications Manager is a popular enterprise solution
+    for monitoring and managing deployed servers and applications
+    on a network. Privileged access could yield significant insight
+    or leverage into the network. This module exploits an unauthenticated
+    SQL injection in order to read users and password hashes from the database.
+    This is fixed in vuild version 13610.
 
     Categories: Enterprise
 
     Price: 4
 
-    Video: none
+    Video: https://asciinema.org/a/Oyqxg2nLLX8h4TCn8hRblPOaw
 
     OS: Multi
 

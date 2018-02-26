@@ -17,15 +17,18 @@ class MetasploitModule < Msf::Auxiliary
     This module exploits an unauthenticated stackable SQL injection in order to
     add a new admin user to the database.
 
-    A longer description after the short description goes into more
-    detail about the module, the vulnerbaility, or whatever information
-    is useful to provide for documentation purposes.
+    ManageEngine Applications Manager is a popular enterprise solution
+    for monitoring and managing deployed servers and applications
+    on a network. Privileged access could yield significant insight
+    or leverage into the network. This module exploits an unauthenticated
+    SQL injection in order to add a new admin user to the application. This
+    is fixed in vuild version 13610.
 
     Categories: Enterprise
 
     Price: 4
 
-    Video: none
+    Video: https://asciinema.org/a/WZUlQLtXfITomcyGlE4aC9Sy5
 
     OS: Multi
 
