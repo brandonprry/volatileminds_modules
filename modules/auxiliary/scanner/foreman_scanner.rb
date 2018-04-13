@@ -15,7 +15,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize
     super(
-      'Name'        => 'Foreman Scanner,',
+      'Name'        => 'Foreman Scanner',
       'Description' => %q{
 This module scans for instances of Foreman, an open-source provisioning application.
 
